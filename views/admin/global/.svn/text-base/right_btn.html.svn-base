@@ -1,0 +1,3 @@
+<volist name="button['right']" id="rightval" empty="无权限">
+		<a  {:buttonvfy($rightval,array('id'=>$v['id']))}  title="{$rightval.title}"><i class="fa fa-lg  text-navy {$rightval['ico']}"></i></a>&nbsp;&nbsp;
+</volist>

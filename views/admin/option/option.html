@@ -1,0 +1,61 @@
+<!--{template "../global/head.html"}-->
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<form id="form" autocomplete="off">
+				<div class="ibox-title">
+					<h5>权限菜单<small><a href="http://fontawesome.dashgame.com/" target="_blank">参考图标</a></small></h5>
+				</div>
+				<div class="ibox-content">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th width="8%">排序</th>
+									<th>节点名称</th>
+									<th width="20%">跳转地址（Beego urlfor值）</th>
+									<th width="8%">类型</th>
+									<th width="5%">状态</th>
+									<th width="5%">图标</th>
+									<th width="8%">提示</th>
+									<th width="15%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--{range .Lists}-->
+									<tr>
+										<td align="left">
+											<input class="form-control text-center" type="text" size="5" name="sort[]" value="<!--{.Sort}-->" />
+											<input type="hidden" name="id[]" value="<!--{.Id}-->">
+										</td>
+										<td class="cz" pid="<!--{.Pid}-->" id="<!--{.Id}-->"><!--{(str_replace .Level "&nbsp;") | str2html}--><span l="" class="doubleclick" j="title"><!--{.Title}--></span></td>
+										<td id="{$v.id}"><span j="name" class="doubleclick"><!--{.Url}--></span></td>
+										<td>{$v.position|positionval}</td>
+										<td>
+											<!--{if .Status}-->
+												<font color="green">启动</font>
+											<!--{else}-->
+												<font color="red">关闭</font>
+											<!--{end}-->
+										</td>
+										<td><i class="<!--{.Ico}--> fa"></i></td>
+										<td>{$v.hint|hint}</td>
+										<td>
+
+
+										</td>
+									</tr>
+								<!--{end}-->
+							</tbody>
+						</table>
+						<a class="btn btn-primary btn-sm" onclick="$.window('测试','<!--{urlfor "OptionController.AddOption"}-->')"  title="{$bottomval.title}"><i class="fa fa-add"></i> 添加</a>&nbsp;
+						<!--{template "../global/bottom_btn.html"}-->
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

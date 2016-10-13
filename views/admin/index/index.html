@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="renderer" content="webkit">
+	<title>
+		<!--{.title}-->
+	</title>
+	<meta name="keywords" content="LAZYWE的博客">
+	<meta name="description" content="LAZYWE的博客">
+	<!--[if lt IE 8]>
+		<script>
+			alert('此系统已经不支持IE6-8，请使用谷歌、火狐等浏览器\n或360、QQ等国产浏览器的极速模式浏览本页面！');
+		</script>	
+        <![endif]-->
+
+	<link href="<!--{config "String" "admin.skin" ""}-->/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<!--{config "String" "admin.skin" ""}-->/css/font-awesome.min.css" rel="stylesheet">
+	<link href="<!--{config "String" "admin.skin" ""}-->/css/animate.min.css" rel="stylesheet">
+	<link href="<!--{config "String" "admin.skin" ""}-->/css/style.min.css" rel="stylesheet">
+	<link href="<!--{config "String" "admin.skin" ""}-->/css/toastr.min.css" rel="stylesheet">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg">
+	<div id="wrapper">
+		<!--左侧导航开始-->
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<div class="nav-close"><i class="fa fa-times-circle"></i>
+			</div>
+			<div class="sidebar-collapse">
+				<ul class="nav" id="side-menu">
+					<li class="nav-header">
+						<div class="dropdown profile-element">
+							<span></span>
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<span class="clear">
+                               <span class="block m-t-xs"><strong class="font-bold">登录的用户名称</strong></span>
+								<span class="text-muted text-xs block">登录的用户名称<b class="caret"></b></span>
+								</span>
+							</a>
+							<ul class="dropdown-menu animated fadeInRight m-t-xs">
+								<li><a class="J_menuItem" href="mailbox.html">修改密码</a>
+								</li>
+								<li class="divider"></li>
+								<li><a href="／main/login/logout.html">安全退出</a>
+								</li>
+							</ul>
+						</div>
+						<div class="logo-element">MI
+						</div>
+					</li>
+					<!--{range .Menus}-->
+					<li>
+						<a <!--{if not .Son}-->class="J_menuItem"<!--{end}--> title="<!--{.Title}-->" href="<!--{.Url}-->" did="<!--{.Url}-->">
+							<!--{if .Ico}--><i class="fa <!--{.Ico}-->"></i><!--{end}-->
+							<span class="nav-label"><!--{.Title}--></span>
+							<!--{if .Son}-->
+							<span class="fa arrow"></span>
+							<!--{end}-->
+						</a>
+						<!--{if .Son}-->
+						<ul class="nav nav-second-level">
+							<!--{range .Son}-->
+								<li>
+									<a class="J_menuItem" href="<!--{urlfor .Url "btnid" .Id}-->" title="<!--{.Title}-->" did="<!--{.Url}-->" data-index="i}"><!--{.Title}--></a>
+								</li>
+							<!--{end}-->
+						</ul>
+						<!--{end}-->
+
+					</li>
+					<!--{end}-->
+				</ul>
+			</div>
+		</nav>
+		<!--左侧导航结束-->
+		<!--右侧部分开始-->
+		<div id="page-wrapper" class="gray-bg dashbard-1">
+			<div class="row border-bottom">
+				<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+					<div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+						<span class="order-msg J_menuItem" did="MDAwMDAwMDAwMLBmat2SqrqyhJicpbx5hmixa4JgkqVyqL-mnmuDdWzUyHti1w" title="订单管理" href="{:U('order/index',array('btn_id'=>'78'))}">
+	                   		有新订单哦，点击查看
+	                   	</span>
+					</div>
+				</nav>
+			</div>
+			<div class="row content-tabs">
+				<button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+                </button>
+				<nav class="page-tabs J_menuTabs">
+					<div class="page-tabs-content">
+						<a href="javascript:;" class="active J_menuTab" data-id="<!--{urlfor " MainController.Panal "}-->">首页</a>
+					</div>
+				</nav>
+				<button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+                </button>
+				<button id="J_refresh" class="roll-nav roll-right dropdown J_tabClose"><i class="fa fa-refresh fa-spin"></i> <span class="dropdown-toggle" data-toggle="dropdown">刷新</span>
+                </button>
+				<a href="{:U('login/login_out')}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+			</div>
+			<div class="row J_mainContent" id="content-main">
+				<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src='<!--{urlfor "MainController.Panal"}-->' frameborder="0"
+					data-id="<!--{urlfor " MainController.Panal "}-->" seamless></iframe>
+			</div>
+			<div class="footer">
+				<div class="pull-right">{:C("copyright")}</div>
+			</div>
+		</div>
+		<!--右侧部分结束-->
+	</div>
+
+	<!-- 全局js -->
+	<script src="<!--{config "String" "admin.skin" ""}-->/js/jquery-2.1.1.min.js"></script>
+	<script src="<!--{config "String" "admin.skin" ""}-->/js/bootstrap.min.js"></script>
+	<script src="<!--{config "String" "admin.skin" ""}-->/js/jquery.metisMenu.js"></script>
+	<script src="<!--{config "String" "admin.skin" ""}-->/js/jquery.slimscroll.min.js"></script>
+	<script src="<!--{config "String" "admin.skin" ""}-->/js/layer/layer.js"></script>
+
+	<!-- 自定义js -->
+	<script src="<!--{config "String" "admin.skin" ""}-->/js/hplus.min.js"></script>
+	<script type="text/javascript" src="<!--{config "String" "admin.skin" ""}-->/js/contabs.min.js"></script>
+	<!-- 第三方插件 -->
+	<script src="<!--{config "String" "admin.skin" ""}-->/js/pace.min.js"></script>
+
+	<div class="theme-config">
+		<div class="theme-config-box">
+			<div class="spin-icon">
+				<i class="fa fa-cog fa-spin"></i>
+			</div>
+			<div class="skin-setttings">
+				<div class="title">主题设置</div>
+				<div class="setings-item">
+					<span>
+	                        收起左侧菜单
+	                    </span>
+
+					<div class="switch">
+						<div class="onoffswitch">
+							<input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu">
+							<label class="onoffswitch-label" for="collapsemenu">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+						</div>
+					</div>
+				</div>
+				<div class="setings-item">
+					<span>
+	                        提示音状态
+	                    </span>
+
+					<div class="switch">
+						<div class="onoffswitch">
+							<input type="checkbox" name="wavstatus" class="onoffswitch-checkbox" id="wavstatus">
+							<label class="onoffswitch-label" for="wavstatus">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+						</div>
+					</div>
+				</div>
+				<div class="setings-item">
+					<span>
+	                        固定顶部
+	                    </span>
+
+					<div class="switch">
+						<div class="onoffswitch">
+							<input type="checkbox" name="fixednavbar" class="onoffswitch-checkbox" id="fixednavbar">
+							<label class="onoffswitch-label" for="fixednavbar">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+						</div>
+					</div>
+				</div>
+				<div class="setings-item">
+					<span>
+	                        固定宽度
+	                    </span>
+
+					<div class="switch">
+						<div class="onoffswitch">
+							<input type="checkbox" name="boxedlayout" class="onoffswitch-checkbox" id="boxedlayout">
+							<label class="onoffswitch-label" for="boxedlayout">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+						</div>
+					</div>
+				</div>
+				<div class="title">皮肤选择</div>
+				<div class="setings-item default-skin">
+					<span class="skin-name ">
+	                         <a href="#" class="s-skin-0">
+	                             默认皮肤
+	                         </a>
+	                    </span>
+				</div>
+				<div class="setings-item blue-skin">
+					<span class="skin-name ">
+	                        <a href="#" class="s-skin-1">
+	                            蓝色主题
+	                        </a>
+	                    </span>
+				</div>
+				<div class="setings-item yellow-skin">
+					<span class="skin-name ">
+	                        <a href="#" class="s-skin-3">
+	                            黄色/紫色主题
+	                        </a>
+	                    </span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="<!--{config "String" "admin.skin" ""}-->/js/socket.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+			$("#fixednavbar").click(function(){if($("#fixednavbar").is(":checked"))(".navbar-static-top").removeClass("navbar-static-top").addClass("navbar-fixed-top");$("body").removeClass("boxed-layout");$("body").addClass("fixed-nav");$("#boxedlayout").prop("checked",false);if(localStorageSupport){localStorage.setItem("boxedlayout","off")}if(localStorageSupport){localStorage.setItem("fixednavbar","on")}}else(".navbar-fixed-top").removeClass("navbar-fixed-top").addClass("navbar-static-top");$("body").removeClass("fixed-nav");if(localStorageSupport){localStorage.setItem("fixednavbar","off")}}});$("#wavstatus").click(function(){if($("#wavstatus").is(":checked")){if(localStorageSupport){localStorage.setItem("wavstatus","on")}}else{if(localStorageSupport){localStorage.setItem("wavstatus","off")}}});$("#collapsemenu").click(function(){if($("#collapsemenu").is(":checked"))("body").addClass("mini-navbar");SmoothlyMenu();if(localStorageSupport){localStorage.setItem("collapse_menu","on")}}else("body").removeClass("mini-navbar");SmoothlyMenu();if(localStorageSupport){localStorage.setItem("collapse_menu","off")}}});$("#boxedlayout").click(function(){if($("#boxedlayout").is(":checked"))("body").addClass("boxed-layout");$("#fixednavbar").prop("checked",false);$(".navbar-fixed-top").removeClass("navbar-fixed-top").addClass("navbar-static-top");$("body").removeClass("fixed-nav");if(localStorageSupport){localStorage.setItem("fixednavbar","off")}if(localStorageSupport){localStorage.setItem("boxedlayout","on")}}else("body").removeClass("boxed-layout");if(localStorageSupport){localStorage.setItem("boxedlayout","off")}}});$(".spin-icon").click(function()(".theme-config-box").toggleClass("show")});$(".s-skin-0").click(function()("body").removeClass("skin-1");$("body").removeClass("skin-2");$("body").removeClass("skin-3")});$(".s-skin-1").click(function()("body").removeClass("skin-2");$("body").removeClass("skin-3");$("body").addClass("skin-1")});$(".s-skin-3").click(function()("body").removeClass("skin-1");$("body").removeClass("skin-2");$("body").addClass("skin-3")});if(localStorageSupport){var collapse=localStorage.getItem("collapse_menu");var fixednavbar=localStorage.getItem("fixednavbar");var boxedlayout=localStorage.getItem("boxedlayout");var wavstatus=localStorage.getItem("wavstatus");if(collapse=="on")("#collapsemenu").prop("checked","checked")}if(fixednavbar=="on")("#fixednavbar").prop("checked","checked")}if(boxedlayout=="on")("#boxedlayout").prop("checked","checked")}if(wavstatus=="on")("#wavstatus").prop("checked","checked")}};
+			/*刷新*/
+			$('#J_refresh').bind('click', function() {
+				$('#content-main iframe:visible')[0].contentWindow.location.reload();
+			});
+			ioc = io.connect('101.200.139.139:9001');
+			ioc.on('new_order', function(msg) {
+				$('.order-msg').show()
+				var wavstatus = localStorage.getItem("wavstatus");
+				if(wavstatus == 'on'){
+					$.playSound();
+				}
+			})
+			$(function() {
+				$('.order-msg').click(function() {
+					$(this).hide()
+				})
+				var au = document.createElement("audio");
+				au.preload = "auto";
+				au.src = "<!--{config "String" "admin.skin" ""}-->/wav/6138.wav";
+				$.playSound = function() {
+					au.play();
+				}
+			})
+		</script>
+	<style>
+		.fixed-nav .slimScrollDiv #side-menu {
+			padding-bottom: 60px;
+		}
+	</style>
+</body>
+
+</html>

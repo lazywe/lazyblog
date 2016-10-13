@@ -1,0 +1,158 @@
+<!--{template "../global/head.html" .}-->
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<form id="form" autocomplete="off">
+				<div class="ibox-title">
+					<h5>权限菜单<small><a href="http://fontawesome.dashgame.com/" target="_blank">参考图标</a></small></h5>
+				</div>
+				<div class="ibox-content">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th width="8%">排序</th>
+									<th>节点名称</th>
+									<th width="20%">跳转地址（Beego urlfor值）</th>
+									<th width="8%">类型</th>
+									<th width="5%">状态</th>
+									<th width="5%">图标</th>
+									<th width="8%">提示</th>
+									<th width="15%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--{range .Lists}-->
+									<tr>
+										<td align="left">
+											<input class="form-control text-center" type="text" size="5" name="sort[]" value="<!--{.Sort}-->" />
+											<input type="hidden" name="id[]" value="<!--{.Id}-->">
+										</td>
+										<td class="cz" pid="<!--{.Pid}-->" id="<!--{.Id}-->"><!--{(str_replace .Level "&nbsp;") | str2html}--><span l="" class="doubleclick" j="title"><!--{.Title}--></span></td>
+										<td id="{$v.id}"><span j="name" class="doubleclick"><!--{.Url}--></span></td>
+										<td>{$v.position|positionval}</td>
+										<td>
+											<!--{if .Status}-->
+												<font color="green">启动</font>
+											<!--{else}-->
+												<font color="red">关闭</font>
+											<!--{end}-->
+										</td>
+										<td><i class="<!--{.Ico}--> fa"></i></td>
+										<td>{$v.hint|hint}</td>
+										<td>
+											<include file="Global:right_btn"/>
+										</td>
+									</tr>
+								<!--{end}-->
+							</tbody>
+						</table>
+						<include file="Global:bottom_btn"/>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+<script>
+	$(function() {
+		$(".cz[pid!=0]").parent().toggle();
+		$('.cz').on('click', function() {
+			$.h($(this), "none");
+		})
+		$.h = function(_t, s) {
+				var id = _t.attr('id');
+				$(".cz[pid=" + id + "]").each(function() {
+					if (s == 'none') {
+						$(this).parent().toggle();
+					} else {
+						if (s == true) {
+							$(this).parent().show();
+						} else {
+							$(this).parent().hide();
+						}
+					}
+					if ($(this).is(":visible") == false) {
+						$.h($(this), false);
+					}
+				})
+			}
+			//		window.c=true;
+		$('.doubleclick').dblclick(function() {
+			$('.doubleclick').unbind()
+				//			c=false;
+			var j = $(this).attr('j');
+			$.dbc($(this), j);
+		})
+		$.dbc = function(t, j) {
+			var msg = t.html();
+			var level=t.attr('l');
+			var ls='';
+			var inps = "<input class='form-control alone' js='" + j + "' type='text' size='30' value='" + msg + "'/>";
+			t.parent().html(inps)
+			$('.alone').bind('keypress', function(event) {
+				if (event.keyCode == "13") {
+					$.alone($(this),t);
+				}
+				if(event.keyCode=='27' || event.keyCode=='96'){
+					if(level!='' && level!='0'){
+						ls=str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;",level);
+					}
+					var ht = ls+"<span j='" + j + "' l="+level+" class='doubleclick'>" + msg+ "</span>";
+					$(this).parent().html(ht)
+					$('.doubleclick').bind('dblclick', function() {
+						$('.doubleclick').unbind()
+						var j = $(this).attr('j');
+						$.dbc($(this), j);
+					})
+				}
+			})
+		}
+		$.alone = function(t,ts) {
+			var jm = t.attr('js');
+			var level=ts.attr('l');
+			var ls='';
+			var data = (jm + '=' + t.val() + '&id=' + t.parent().attr('id'));
+			$.post('{:U("__URL__/update")}', data, function(e, status) {
+				if (status == 'success') {
+					if (e.status == '0') {
+						$.toast('提示信息',e.info,'warning')
+					} else {
+						if(level!='' && level!='0'){
+							ls=str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;",level);
+						}
+						var ht = ls+"<span j='" + jm + "' l="+level+" class='doubleclick'>" + t.val()+ "</span>";
+						t.parent().html(ht)
+						$('.doubleclick').bind('dblclick', function() {
+							$('.doubleclick').unbind()
+							var j = $(this).attr('j');
+							$.dbc($(this), j);
+						})
+					}
+				} else {
+					$.toast('提示信息',"请求失败",'warning')
+				}
+			}, 'json')
+		}
+	})
+	
+	function str_repeat(target, n){ 
+		  var s = target, total = "";
+		  while (n > 0) {
+		    if (n % 2 == 1) {
+		      total += s;
+		    }
+		    if (n == 1) {
+		      break;
+		    }
+		    s += s;
+		    n = n >> 1;//相当于将n除以2取其商，或者说是开2次方
+		  }
+		  return total;
+		}
+</script>
+

@@ -1,0 +1,10 @@
+<div class="dataTables_paginate paging_simple_numbers" style="text-align: right;">
+	<ul class="pagination">
+		{$page}
+	</ul>
+</div>
+<div class="dataTables_paginate paging_simple_numbers">
+	<volist name="button['bottom']" id="bottomval">
+		<a class="btn btn-primary btn-sm" {:buttonvfy($bottomval)} title="{$bottomval.title}"><i class="fa {$bottomval['ico']}"></i> {$bottomval.title}</a>&nbsp;
+	</volist>
+</div>
