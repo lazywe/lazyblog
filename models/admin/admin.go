@@ -3,7 +3,7 @@ package admin
 import "github.com/astaxie/beego/orm"
 
 type Admin struct {
-	Id   int    `orm:"pk;auto;` //主键
+	Id   int    `orm:"pk;auto;"` //主键
 	User string `orm:"default(0);size(32)"`
 	Pass string `orm:"default(0);size(32)"`
 	Salt string `orm:"default(0);size(32)"`

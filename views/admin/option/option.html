@@ -13,12 +13,9 @@
 							<thead>
 								<tr>
 									<th width="8%">排序</th>
-									<th>节点名称</th>
-									<th width="20%">跳转地址（Beego urlfor值）</th>
-									<th width="8%">类型</th>
-									<th width="5%">状态</th>
-									<th width="5%">图标</th>
-									<th width="8%">提示</th>
+									<th>功能名称</th>
+									<th width="5%">创建时间</th>
+									<th width="8%">修改时间</th>
 									<th width="15%">操作</th>
 								</tr>
 							</thead>
@@ -29,22 +26,14 @@
 											<input class="form-control text-center" type="text" size="5" name="sort[]" value="<!--{.Sort}-->" />
 											<input type="hidden" name="id[]" value="<!--{.Id}-->">
 										</td>
-										<td class="cz" pid="<!--{.Pid}-->" id="<!--{.Id}-->"><!--{(str_replace .Level "&nbsp;") | str2html}--><span l="" class="doubleclick" j="title"><!--{.Title}--></span></td>
-										<td id="{$v.id}"><span j="name" class="doubleclick"><!--{.Url}--></span></td>
-										<td>{$v.position|positionval}</td>
+										<td><!--{.Title}--></td>
 										<td>
-											<!--{if .Status}-->
-												<font color="green">启动</font>
-											<!--{else}-->
-												<font color="red">关闭</font>
-											<!--{end}-->
+											<!--{time_format .CreateTime "Y-m-d H:i:s"}-->
 										</td>
-										<td><i class="<!--{.Ico}--> fa"></i></td>
-										<td>{$v.hint|hint}</td>
 										<td>
-
-
+											<!--{.UpdateTime}-->
 										</td>
+										<td>查\d</td>
 									</tr>
 								<!--{end}-->
 							</tbody>

@@ -4,125 +4,29 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox-title">
-					<h5>权限菜单操作 </h5>
+					<h5>添加功能</h5>
 				</div>
 				<div class="ibox-content" style="display: block; ">
 					<form method="post" id="form" class="form-horizontal" action="">
-						<input type="hidden" name="id" value="{$val.id}">
-						<input type="hidden" name="href" value="{$come}" >
+
 						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>名称</label>
+							<label class="col-sm-1 control-label"><span class="red">＊</span>功能名称</label>
 							<div class="col-sm-4">
-								<input type="text" name="title" value="{$val.title}" class="form-control">
+								<input type="text" name="title" value="" class="form-control">
 							</div>
 							<span class="help-block m-b-none">输入权限菜单/按钮名称</span>
 						</div>
 						<div class="hr-line-dashed"></div>
+
 						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>上级</label>
+							<label class="col-sm-1 control-label"><span class="red">＊</span>排序</label>
 							<div class="col-sm-4">
-								<select class="select form-control m-b" name="pid">
-									<option value="0">根菜单</option>
-									<volist name="select" id="v">
-										<option value="{$v.id}" >{$v.title}</option>
-									</volist>
-								</select>
+								<input type="text" name="sort" value="" class="form-control">
 							</div>
+							<span class="help-block m-b-none">输入排序值，越笑越靠前</span>
 						</div>
 						<div class="hr-line-dashed"></div>
 
-						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>地址</label>
-							<div class="col-sm-4">
-								<input type="text" name="name" value="{$val.name}" class="form-control">
-							</div>
-							<span class="help-block m-b-none">模块/控制器/方法（尽量小写）</span>
-						</div>
-						<div class="hr-line-dashed"></div>
-
-						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>类型</label>
-							<div class="col-sm-4">
-								<input type="text" name="type" value="{$val.type}" class="form-control">
-							</div>
-							<span class="help-block m-b-none">1为实时认证；2为登录认证</span>
-						</div>
-						<div class="hr-line-dashed"></div>
-
-						<div class="form-group">
-							<label class="col-sm-1 control-label">排序</label>
-							<div class="col-sm-4">
-								<input type="text" name="sort" value="{$val.sort}" class="form-control">
-							</div>
-							<span class="help-block m-b-none">升序排列</span>
-						</div>
-						<div class="hr-line-dashed"></div>
-
-						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>位置
-							</label>
-
-							<div class="col-sm-4">
-								<label class="checkbox-inline">
-									<input type="radio" name="position" id="optionsRadios3" value="list" {$val.position|check="list",1}> 列表
-								</label>
-
-								<label class="checkbox-inline">
-									<input type="radio" name="position" id="optionsRadios3" value="bottom" {$val.position|check="bottom"}> 底部
-								</label>
-
-								<label class="checkbox-inline">
-									<input type="radio" name="position" id="optionsRadios3" value="right" {$val.position|check="right"}> 右侧
-								</label>
-							</div>
-							<span class="help-block m-b-none"></span>
-						</div>
-						<div class="hr-line-dashed"></div>
-				
-						
-						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>提示
-							</label>
-							<div class="col-sm-4">
-								<label class="checkbox-inline">
-										<input type="radio"  value="href" name="hint" {$val.hint|check="href",1} > 跳转
-								</label>
-								<label class="checkbox-inline">
-										<input type="radio"   value="alert" name="hint" {$val.hint|check="alert"}> 弹出提示
-								</label>
-
-								<label class="checkbox-inline">
-										<input type="radio"  value="window" name="hint" {$val.hint|check="window"}> 打开窗口
-								</label>
-							</div>
-							<div class="help-block m-b-none">仅按钮有效，触发按钮时提示用户是否操作,或者启用窗口</div>
-						</div>
-						<div class="hr-line-dashed"></div>
-				
-						<div class="form-group">
-							<label class="col-sm-1 control-label">图标</label>
-							<div class="col-sm-4">
-								<input type="text" name="ico" value="{$val.ico}" class="form-control">
-							</div>
-							<span class="help-block m-b-none">列表图标，按钮图标的CLASS,（例如：修改->"fa-edit"）<a target="_blank" href="http://fontawesome.dashgame.com/">图标参考</a></span>
-						</div>
-						<div class="hr-line-dashed"></div>
-						
-						
-						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>状态
-							</label>
-							<div class="col-sm-4">
-								<label class="checkbox-inline">
-										<input type="radio"  value="on" name="status" {$val.status|check="on",1}> 启动
-								</label>
-
-								<label class="checkbox-inline">
-										<input type="radio"  value="off" name="status" {$val.status|check="off"} > 关闭
-								</label>
-							</div>
-						</div>
-						<div class="hr-line-dashed"></div>
 						<div class="form-group">
 							<label class="col-sm-1 control-label">&nbsp;
 							</label>
