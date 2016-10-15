@@ -18,7 +18,7 @@ type Menu struct {
 	Son   []*Menu
 }
 
-func (this *AdminController) Get() {
+func (this *AdminController) Main() {
 	this.Data["title"] = "我的博客"
 	var node = new(admin.Node)
 	err, nodelist := node.GetNodeList()

@@ -11,12 +11,14 @@ type Option struct {
 }
 
 //
-// 查询功能
+// 查询功能列表
 //
-func (this *Option) FindList() (error, []Option) {
+func (this *Option) GetOptionList() (error, []Option) {
 	o := orm.NewOrm()
 	var option []Option
-	_, err := o.QueryTable(this).All(&option)
+	result := o.QueryTable(this)
+	result = result.OrderBy("-Sort")
+	_, err := result.All(&option)
 	if err != nil {
 		return err, nil
 	}
@@ -26,7 +28,7 @@ func (this *Option) FindList() (error, []Option) {
 //
 // 添加功能
 //
-func (this *Option) Add() (error, int) {
+func (this *Option) AddOption() (error, int) {
 	o := orm.NewOrm()
 	id, err := o.Insert(this)
 	if err != nil {
@@ -38,10 +40,49 @@ func (this *Option) Add() (error, int) {
 //
 // 修改功能
 //
-func (this *Option) Update(id int) (error, int) {
+func (this *Option) UpdateOption(id int) (error, int) {
 	o := orm.NewOrm()
 	this.Id = id
-	num, err := o.Update(this)
+	num, err := o.Update(this, "Title", "Sort", "UpdateTime")
+	if err != nil {
+		return orm.ErrNoRows, 0
+	}
+	return nil, int(num)
+}
+
+//
+// 读取功能
+//
+func (this *Option) GetOptionInfo(id int) (error, *Option) {
+	o := orm.NewOrm()
+	this.Id = id
+	err := o.Read(this)
+	if err != nil {
+		return err, nil
+	}
+	return nil, this
+}
+
+//
+// 删除
+//
+func (this *Option) DelOption(id int) (error, int) {
+	o := orm.NewOrm()
+	this.Id = id
+	num, err := o.Delete(this)
+	if err != nil {
+		return err, 0
+	}
+	return nil, int(num)
+}
+
+//
+// 排序
+//
+func (this *Option) SortOption(id int) (error, int) {
+	o := orm.NewOrm()
+	this.Id = id
+	num, err := o.Update(this, "Sort")
 	if err != nil {
 		return err, 0
 	}

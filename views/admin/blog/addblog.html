@@ -4,17 +4,42 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox-title">
-					<h5>添加功能</h5>
+					<h5>添加博客</h5>
 				</div>
 				<div class="ibox-content" style="display: block; ">
 					<form method="post" id="form" class="form-horizontal" action="">
 
 						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>功能名称</label>
+							<label class="col-sm-1 control-label"><span class="red">＊</span>标题</label>
 							<div class="col-sm-4">
-								<input type="text" name="title" placeholder="功能名称（添加，修改）" value="" class="form-control">
+								<input type="text" name="title" placeholder="博客标题" value="" class="form-control">
 							</div>
-							<span class="help-block m-b-none">功能名称（添加，修改）</span>
+							<span class="help-block m-b-none">博客标题</span>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+
+						<div class="form-group">
+							<label class="col-sm-1 control-label"><span class="red">＊</span>内容</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" placeholder="支持markdown语法" rows="15" style="width:100%;" name="content"></textarea>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+
+						<div class="form-group">
+							<label class="col-sm-1 control-label"><span class="red">＊</span>状态
+							</label>
+							<div class="col-sm-4">
+								<label class="checkbox-inline">
+										<input type="radio"  value="1" name="state" checked="checked"> 启动
+								</label>
+
+								<label class="checkbox-inline">
+										<input type="radio"  value="0" name="state" > 关闭
+								</label>
+							</div>
 						</div>
 						<div class="hr-line-dashed"></div>
 

@@ -120,7 +120,7 @@ $(function(){
 		$.postform(function(e){
 			if(e.status==1){
 				dom.unbind('click');
-				location.href=e.url;
+				location.href=e.data.url;
 			}
 		});
 	})
@@ -146,7 +146,7 @@ $(function(){
 					windowDom.location.reload();
 					parent.layer.close(tlayer);
 				}else{
-					location.href=e.url;
+					location.href=e.data.url;
 				}
 			}
 		});

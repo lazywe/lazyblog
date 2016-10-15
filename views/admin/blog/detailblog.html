@@ -1,0 +1,27 @@
+<!--{template "../global/head.html"}-->
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox-title">
+					<h5><!--{.Val.Title}--></h5>
+				</div>
+				<div class="ibox-content" style="display: block; ">
+					<form method="post" id="form" class="form-horizontal" action="">
+
+						<div class="form-group">
+							<div class="col-sm-10" id="content"></div>
+						</div>
+						<div class="hr-line-dashed"></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="<!--{config "String" "admin.skin" ""}-->/js/component/markdown.js"></script>
+<script>
+    document.getElementById('content').innerHTML =
+      marked('<!--{.Val.Content}-->');
+  </script>

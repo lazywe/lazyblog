@@ -16,7 +16,7 @@ type OptionController struct {
 //
 func (this *OptionController) Option() {
 	var optionMode = new(admin.Option)
-	_, option := optionMode.FindList()
+	_, option := optionMode.GetOptionList()
 	this.Data["Lists"] = option
 	this.TplName = "option/option.html"
 	return
@@ -47,11 +47,13 @@ func (this *OptionController) AddOptionDo() {
 		}
 	}
 	optionMode := &admin.Option{Title: title, Sort: sortid, CreateTime: this.Time}
-	err, _ := optionMode.Add()
+	err, _ := optionMode.AddOption()
 	if err == nil {
 		this.AjaxReturn("1", "添加成功", nil)
+		return
 	} else {
 		this.AjaxReturn("0", "添加失败", nil)
+		return
 	}
 }
 
@@ -59,6 +61,21 @@ func (this *OptionController) AddOptionDo() {
 //修改功能
 //
 func (this *OptionController) EditOption() {
+	id := this.Input().Get("id")
+	idint, _ := strconv.Atoi(id)
+	var optionmodel = new(admin.Option)
+	err, result := optionmodel.GetOptionInfo(idint)
+	if err != nil {
+		this.Redirect("/", 1)
+	}
+	this.Data["Val"] = result
+	this.TplName = "option/editoption.html"
+}
+
+//
+//修改功能
+//
+func (this *OptionController) EditOptionDo() {
 	title := this.Input().Get("title")
 	sort := this.Input().Get("sort")
 	sortid, _ := strconv.Atoi(sort)
@@ -75,25 +92,65 @@ func (this *OptionController) EditOption() {
 	}
 	optionMode := &admin.Option{Title: title, Sort: sortid, UpdateTime: this.Time}
 	autoid, _ := strconv.Atoi(id)
-	err, _ := optionMode.Update(autoid)
+	err, _ := optionMode.UpdateOption(autoid)
 	if err == nil {
 		this.AjaxReturn("1", "修改成功", nil)
+		return
 	} else {
 		this.AjaxReturn("0", "修改失败", nil)
+		return
 	}
-	return
-}
-
-//
-//修改功能
-//
-func (this *OptionController) EditOptionDo() {
-
 }
 
 //
 //删除功能
 //
 func (this *OptionController) DelOption() {
+	id := this.Input().Get("id")
+	valid := validation.Validation{}
+	valid.Required(id, "id").Message("非法操作")
+	if valid.HasErrors() {
+		// 打印错误信息
+		for _, err := range valid.Errors {
+			this.AjaxReturn("0", err.Message, nil)
+			return
+		}
+	}
+	autoid, _ := strconv.Atoi(id)
+	var optionmodel = new(admin.Option)
+	err, _ := optionmodel.DelOption(autoid)
+	if err == nil {
+		this.AjaxReturn("1", "删除成功", nil)
+		return
+	} else {
+		this.AjaxReturn("0", "删除失败", nil)
+		return
+	}
+}
 
+//
+//更新排序
+//
+func (this *OptionController) SortOption() {
+	ids := make([]string, 0)
+	sorts := make([]string, 0)
+	this.Ctx.Input.Bind(&ids, "id")
+	this.Ctx.Input.Bind(&sorts, "sort")
+	if ids == nil {
+		this.AjaxReturn("0", "更新失败1", nil)
+		return
+	}
+	var optionmodel = new(admin.Option)
+	for k, v := range ids {
+		sortid, _ := strconv.Atoi(sorts[k])
+		id, _ := strconv.Atoi(v)
+		optionmodel.Sort = sortid
+		err, _ := optionmodel.SortOption(id)
+		if err != nil {
+			this.AjaxReturn("0", "更新失败2", nil)
+			return
+		}
+	}
+	this.AjaxReturn("1", "更新成功", nil)
+	return
 }
