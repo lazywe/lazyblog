@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"lazyblog/models/admin"
+	"lazyblog/models"
 
 	"github.com/astaxie/beego/validation"
 )
@@ -36,7 +36,7 @@ func (this *LoginController) LoginDo() {
 		}
 	}
 
-	err, result := admin.GetUserInfo(user)
+	err, result := models.GetUserInfo(user)
 	if err == false {
 		this.AjaxReturn("0", "登录失败，用户名或密码错误", nil)
 		return

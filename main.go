@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"lazyblog/functions"
-	"lazyblog/models/admin"
+	"lazyblog/models"
 	_ "lazyblog/routers"
 
 	"github.com/astaxie/beego"
@@ -26,7 +26,7 @@ func init() {
 	dbhost := beego.AppConfig.String("db.host")
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", dbuser+":"+dbpass+"@tcp("+dbhost+")/"+dbdatabase+"?charset=utf8")
-	orm.RegisterModelWithPrefix(dbprefix, new(admin.Admin), new(admin.Node), new(admin.Blog), new(admin.Category), new(admin.Option))
+	orm.RegisterModelWithPrefix(dbprefix, new(models.Admin), new(models.Node), new(models.Blog), new(models.Category), new(models.Option))
 	err := orm.RunSyncdb("default", false, true)
 	if err != nil {
 		fmt.Println(err)

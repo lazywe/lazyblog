@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"lazyblog/models/admin"
+	"lazyblog/models"
 	"strconv"
 
 	"github.com/astaxie/beego/validation"
@@ -15,7 +15,7 @@ type BlogController struct {
 //功能列表
 //
 func (this *BlogController) Blog() {
-	var blogMode = new(admin.Blog)
+	var blogMode = new(models.Blog)
 	_, blog := blogMode.GetBlogList()
 	this.Data["Lists"] = blog
 	this.TplName = "blog/blog.html"
@@ -53,7 +53,7 @@ func (this *BlogController) AddBlogDo() {
 
 	sortid, _ := strconv.Atoi(sort)
 	stateid, _ := strconv.Atoi(state)
-	blogMode := &admin.Blog{Title: title, Sort: sortid, Content: content, State: uint(stateid), CreateTime: this.Time}
+	blogMode := &models.Blog{Title: title, Sort: sortid, Content: content, State: uint(stateid), CreateTime: this.Time}
 	err, _ := blogMode.AddBlog()
 	if err == nil {
 		this.AjaxReturn("1", "添加成功", nil)
@@ -70,7 +70,7 @@ func (this *BlogController) AddBlogDo() {
 func (this *BlogController) EditBlog() {
 	id := this.Input().Get("id")
 	idint, _ := strconv.Atoi(id)
-	var blogmodel = new(admin.Blog)
+	var blogmodel = new(models.Blog)
 	err, result := blogmodel.GetBlogInfo(idint)
 	if err != nil {
 		this.Redirect(this.URLFor("AdminController.Main"), 302)
@@ -108,7 +108,7 @@ func (this *BlogController) EditBlogDo() {
 	sortid, _ := strconv.Atoi(sort)
 	autoid, _ := strconv.Atoi(id)
 	stateid, _ := strconv.Atoi(state)
-	blogMode := &admin.Blog{Title: title, Sort: sortid, Content: content, State: uint(stateid), UpdateTime: this.Time}
+	blogMode := &models.Blog{Title: title, Sort: sortid, Content: content, State: uint(stateid), UpdateTime: this.Time}
 	err, _ := blogMode.UpdateBlog(autoid)
 	if err == nil {
 		this.AjaxReturn("1", "修改成功", nil)
@@ -134,7 +134,7 @@ func (this *BlogController) DelBlog() {
 		}
 	}
 	autoid, _ := strconv.Atoi(id)
-	var blogmodel = new(admin.Blog)
+	var blogmodel = new(models.Blog)
 	err, _ := blogmodel.DelBlog(autoid)
 	if err == nil {
 		this.AjaxReturn("1", "删除成功", nil)
@@ -151,7 +151,7 @@ func (this *BlogController) DelBlog() {
 func (this *BlogController) DetailBlog() {
 	id := this.Input().Get("id")
 	idint, _ := strconv.Atoi(id)
-	var blogmodel = new(admin.Blog)
+	var blogmodel = new(models.Blog)
 	err, result := blogmodel.GetBlogInfo(idint)
 	if err != nil {
 		this.Redirect(this.URLFor("AdminController.Main"), 302)
@@ -174,7 +174,7 @@ func (this *BlogController) SortBlog() {
 		this.AjaxReturn("0", "更新失败", nil)
 		return
 	}
-	var blogmodel = new(admin.Blog)
+	var blogmodel = new(models.Blog)
 	for k, v := range ids {
 		sortid, _ := strconv.Atoi(sorts[k])
 		id, _ := strconv.Atoi(v)

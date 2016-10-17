@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"lazyblog/models/admin"
+	"lazyblog/models"
 	"strconv"
 
 	"github.com/astaxie/beego/validation"
@@ -15,7 +15,7 @@ type OptionController struct {
 //功能列表
 //
 func (this *OptionController) Option() {
-	var optionMode = new(admin.Option)
+	var optionMode = new(models.Option)
 	_, option := optionMode.GetOptionList()
 	this.Data["Lists"] = option
 	this.TplName = "option/option.html"
@@ -46,7 +46,7 @@ func (this *OptionController) AddOptionDo() {
 			return
 		}
 	}
-	optionMode := &admin.Option{Title: title, Sort: sortid, CreateTime: this.Time}
+	optionMode := &models.Option{Title: title, Sort: sortid, CreateTime: this.Time}
 	err, _ := optionMode.AddOption()
 	if err == nil {
 		this.AjaxReturn("1", "添加成功", nil)
@@ -63,7 +63,7 @@ func (this *OptionController) AddOptionDo() {
 func (this *OptionController) EditOption() {
 	id := this.Input().Get("id")
 	idint, _ := strconv.Atoi(id)
-	var optionmodel = new(admin.Option)
+	var optionmodel = new(models.Option)
 	err, result := optionmodel.GetOptionInfo(idint)
 	if err != nil {
 		this.Redirect("/", 1)
@@ -90,7 +90,7 @@ func (this *OptionController) EditOptionDo() {
 			return
 		}
 	}
-	optionMode := &admin.Option{Title: title, Sort: sortid, UpdateTime: this.Time}
+	optionMode := &models.Option{Title: title, Sort: sortid, UpdateTime: this.Time}
 	autoid, _ := strconv.Atoi(id)
 	err, _ := optionMode.UpdateOption(autoid)
 	if err == nil {
@@ -117,7 +117,7 @@ func (this *OptionController) DelOption() {
 		}
 	}
 	autoid, _ := strconv.Atoi(id)
-	var optionmodel = new(admin.Option)
+	var optionmodel = new(models.Option)
 	err, _ := optionmodel.DelOption(autoid)
 	if err == nil {
 		this.AjaxReturn("1", "删除成功", nil)
@@ -140,7 +140,7 @@ func (this *OptionController) SortOption() {
 		this.AjaxReturn("0", "更新失败1", nil)
 		return
 	}
-	var optionmodel = new(admin.Option)
+	var optionmodel = new(models.Option)
 	for k, v := range ids {
 		sortid, _ := strconv.Atoi(sorts[k])
 		id, _ := strconv.Atoi(v)
