@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 .header .nav{
-    width:1000px;
+   
     margin: 0 auto;
     overflow: hidden;
 }
@@ -43,7 +43,7 @@
 
 /*首页详情*/
 .home-panal{
-    width:1000px;
+   
     margin: 0 auto;
     overflow: hidden;
 }
@@ -51,9 +51,12 @@
 /*首页详情左侧*/
 .home-panal .left{
     float: left;
-    width:70%;
+    width:65%;
+    padding: 0 0 20px 0;
 }
-
+.home-panal .left ul{
+    margin-bottom:10px;
+}
 .home-panal .left ul li{
     padding: 30px 0;
     border-bottom: 1px solid #eee;
@@ -63,6 +66,15 @@
     font-size: 20px;
     margin: 0 0 8px;
 }
+.home-panal .left ul li h3 a{
+    text-decoration: none;
+     color: #4183c4;
+}
+.home-panal .left ul li h3 a:hover{
+    text-decoration: underline;
+    color: #418fff;
+}
+
 .home-panal .left ul li .description{
     color: #666;
     width: 90%;
@@ -73,20 +85,134 @@
 .home-panal .left ul li .date{
     color: #888;
     display: block;
+    letter-spacing:1px;
     font-size: 13px;
     margin-top: 12px;
 }
 
 
-.home-panal .left ul li h3 a{
-    text-decoration: none;
-     color: #4183c4;
-}
-
 /*首页详情右侧*/
 .home-panal .right{
     float: left;
-    width:30%;
-    height: 20px;
-     background: #ddd;
+    width:35%;
+    padding-top: 20px;
+}
+.home-panal .right .boxed{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+    border:1px solid #ddd;
+    border-radius: 3px;
+}
+.home-panal .right .boxed h3{
+   background: #f5f5f5;
+   font-size: 14px;
+   padding: 10px 10px;
+}
+
+.home-panal .right .boxed ul li{
+    list-style: none;
+    border-top: 1px solid #eee;
+    height:25px;
+    padding: 8px 8px;
+    line-height: 25px;
+}
+.home-panal .right .boxed ul li a{
+    display: block;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+    text-decoration: none;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    color: #4183c4;
+}
+.home-panal .right .boxed ul li a i{
+    color: #333;
+    font-size: 15px;
+}
+.home-panal .right .boxed ul li a:hover{
+    text-decoration:underline;
+}
+
+/*分页*/
+.page{
+
+}
+.page a{
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-block;
+    border: 1px solid #ddd;
+    line-height: 30px;
+    text-align: center;
+    height:30px;
+}
+.page a.pager{
+    padding: 0 8px;
+}
+.page a.num{
+    width:30px;
+}
+.page a.pager:hover,.page a.num:hover{
+    border-color: #418fff;
+    background: #418fff;
+    color: #fff
+}
+
+/*底部*/
+.footer{
+    padding: 20px 0;
+    margin-top:20px;
+    width: 100%;
+    background: #f5f5f5;
+    border-top:1px solid #eee;
+}
+.footer .nav,.footer .copyright{
+    margin: 0 auto;
+}
+
+.footer .nav ul{
+    overflow: hidden;
+}
+.footer .nav ul li{
+    list-style: none;
+    float: left;
+    padding: 4px 0;
+    margin-right: 20px;
+}
+
+.footer .nav ul li a{
+    display: block;
+    color: #777;
+    text-decoration: none;
+    font-size: 14px;
+}
+.footer .nav ul li a:hover{
+    color: #454545;
+}
+
+.footer .copyright{
+    margin: 10px auto;
+}
+
+.footer .copyright p{
+    color: #333
+}
+.footer .totop{
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    position: fixed;
+    right: 20%;
+    bottom: 14%;
+    width:50px;
+    height:50px;
+    text-align: center;
+    line-height: 4em;
+    border-radius: 100px;
+    background: #418fff
+}
+.footer .totop i{
+    color: #fff;
 }
