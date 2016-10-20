@@ -1,19 +1,17 @@
-<include file="Global:head" />
+<!--{template "../global/head.html" .}-->
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox-title">
-					<h5>权限菜单操作 </h5>
+					<h5>添加节点 </h5>
 				</div>
 				<div class="ibox-content" style="display: block; ">
 					<form method="post" id="form" class="form-horizontal" action="">
-						<input type="hidden" name="id" value="{$val.id}">
-						<input type="hidden" name="href" value="{$come}" >
 						<div class="form-group">
 							<label class="col-sm-1 control-label"><span class="red">＊</span>名称</label>
 							<div class="col-sm-4">
-								<input type="text" name="title" value="{$val.title}" class="form-control">
+								<input type="text" name="title" placeholder="节点名称" class="form-control">
 							</div>
 							<span class="help-block m-b-none">输入权限菜单/按钮名称</span>
 						</div>
@@ -23,9 +21,11 @@
 							<div class="col-sm-4">
 								<select class="select form-control m-b" name="pid">
 									<option value="0">根菜单</option>
-									<volist name="select" id="v">
-										<option value="{$v.id}"  {:selected($gets['pid'],$v['id'])} >{$v.level|str_repeat='&nbsp;&nbsp;&nbsp;&nbsp;',###}{$v.title}</option>
-									</volist>
+									<!--{range .Nodes}-->
+										<option value="<!--{.Id}-->">
+											<!--{(str_replace .Level "&nbsp;") | str2html}--><!--{.Title}-->
+										</option>
+									<!--{end}-->
 								</select>
 							</div>
 						</div>
@@ -34,27 +34,9 @@
 						<div class="form-group">
 							<label class="col-sm-1 control-label"><span class="red">＊</span>地址</label>
 							<div class="col-sm-4">
-								<input type="text" name="name" value="{$val.name}" class="form-control">
+								<input type="text" name="url" value="" class="form-control">
 							</div>
-							<span class="help-block m-b-none">模块/控制器/方法（尽量小写）</span>
-						</div>
-						<div class="hr-line-dashed"></div>
-
-						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>类型</label>
-							<div class="col-sm-4">
-								<input type="text" name="type" value="{$val.type}" class="form-control">
-							</div>
-							<span class="help-block m-b-none">1为实时认证；2为登录认证</span>
-						</div>
-						<div class="hr-line-dashed"></div>
-
-						<div class="form-group">
-							<label class="col-sm-1 control-label">排序</label>
-							<div class="col-sm-4">
-								<input type="text" name="sort" value="{$val.sort}" class="form-control">
-							</div>
-							<span class="help-block m-b-none">升序排列</span>
+							<span class="help-block m-b-none">结构体.方法（例如：MenuController.AddMenu）解析方法 urlfor 函数</span>
 						</div>
 						<div class="hr-line-dashed"></div>
 
@@ -62,17 +44,17 @@
 							<label class="col-sm-1 control-label"><span class="red">＊</span>位置
 							</label>
 
-							<div class="col-sm-4">
+							<div class="col-sm-5">
 								<label class="checkbox-inline">
-									<input type="radio" name="position" id="optionsRadios3" value="list" {$val.position|check="list",1}> 列表
+									<input type="radio" name="position" id="optionsRadios3" value="1" checked="checked"> 数据查询
 								</label>
 
 								<label class="checkbox-inline">
-									<input type="radio" name="position" id="optionsRadios3" value="bottom" {$val.position|check="bottom"}> 底部
+									<input type="radio" name="position" id="optionsRadios3" value="2"> 单条操作
 								</label>
 
 								<label class="checkbox-inline">
-									<input type="radio" name="position" id="optionsRadios3" value="right" {$val.position|check="right"}> 右侧
+									<input type="radio" name="position" id="optionsRadios3" value="3"> 全局按钮
 								</label>
 							</div>
 							<span class="help-block m-b-none"></span>
@@ -83,16 +65,17 @@
 						<div class="form-group">
 							<label class="col-sm-1 control-label"><span class="red">＊</span>提示
 							</label>
-							<div class="col-sm-4">
+							<div class="col-sm-5">
 								<label class="checkbox-inline">
-										<input type="radio"  value="href" name="hint" {$val.hint|check="href",1} > 跳转
-								</label>
-								<label class="checkbox-inline">
-										<input type="radio"   value="alert" name="hint" {$val.hint|check="alert"}> 弹出提示
+										<input type="radio"  value="1" name="hint" checked="checked"> 打开链接
 								</label>
 
 								<label class="checkbox-inline">
-										<input type="radio"  value="window" name="hint" {$val.hint|check="window"}> 打开窗口
+										<input type="radio"  value="2" name="hint"> 弹出提示
+								</label>
+
+								<label class="checkbox-inline">
+										<input type="radio"  value="3" name="hint" > 打开窗口
 								</label>
 							</div>
 							<div class="help-block m-b-none">仅按钮有效，触发按钮时提示用户是否操作,或者启用窗口</div>
@@ -102,7 +85,7 @@
 						<div class="form-group">
 							<label class="col-sm-1 control-label">图标</label>
 							<div class="col-sm-4">
-								<input type="text" name="ico" value="{$val.ico}" class="form-control">
+								<input type="text" name="ico"  class="form-control">
 							</div>
 							<span class="help-block m-b-none">列表图标，按钮图标的CLASS,（例如：修改->"fa-edit"）<a target="_blank" href="http://fontawesome.dashgame.com/">图标参考</a></span>
 						</div>
@@ -110,17 +93,34 @@
 						
 						
 						<div class="form-group">
+							<label class="col-sm-1 control-label">排序</label>
+							<div class="col-sm-4">
+								<input type="text" name="sort" placeholder="值越大越靠前" class="form-control">
+							</div>
+							<span class="help-block m-b-none">升序排列</span>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+						
+						<div class="form-group">
 							<label class="col-sm-1 control-label"><span class="red">＊</span>状态
 							</label>
 							<div class="col-sm-4">
 								<label class="checkbox-inline">
-										<input type="radio"  value="on" name="status" {$val.status|check="on",1}> 启动
+										<input type="radio"  value="1" name="state" checked="checked"> 启动
 								</label>
 
 								<label class="checkbox-inline">
-										<input type="radio"  value="off" name="status" {$val.status|check="off"} > 关闭
+										<input type="radio"  value="0" name="state" > 关闭
 								</label>
 							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+				
+						<div class="form-group">
+							<label class="col-sm-1 control-label">&nbsp;</label>
+							<span class="help-block m-b-none">（例如：修改->"fa-edit"，删除->"fa-trash"，查看->"fa-file-text"）<a target="_blank" href="http://fontawesome.dashgame.com/">图标参考</a></span>
 						</div>
 						<div class="hr-line-dashed"></div>
 						<div class="form-group">
@@ -137,5 +137,4 @@
 		</div>
 	</div>
 </body>
-
 </html>

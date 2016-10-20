@@ -1,20 +1,16 @@
 package admin
 
-import (
-	"lazyblog/models"
-
-	"github.com/astaxie/beego"
-)
+import "lazyblog/models"
 
 type AdminController struct {
-	beego.Controller
+	BaseController
 }
 
 type Menu struct {
 	Title string
 	Url   string
 	Ico   string
-	Id    uint
+	Id    int
 	Son   []*Menu
 }
 
@@ -33,11 +29,11 @@ func (this *AdminController) Main() {
 		Menus = this.MenuList(nodelist, 0)
 	}
 	this.Data["Menus"] = Menus
-	this.TplName = "main/index/index.html"
+	this.TplName = "index/index.html"
 }
 
 //递归节点
-func (this *AdminController) MenuList(node []models.Node, pid uint) []*Menu {
+func (this *AdminController) MenuList(node []models.Node, pid int) []*Menu {
 	var M []*Menu
 	for _, v := range node {
 		if v.Pid == pid {
@@ -54,5 +50,5 @@ func (this *AdminController) MenuList(node []models.Node, pid uint) []*Menu {
 }
 
 func (this *AdminController) Panal() {
-	this.TplName = "main/index/panal.html"
+	this.TplName = "index/panal.html"
 }

@@ -7,42 +7,41 @@ import (
 	"github.com/astaxie/beego/validation"
 )
 
-type BlogController struct {
+type MenuController struct {
 	BaseController
 }
 
 //
 //功能列表
 //
-func (this *BlogController) Blog() {
-	var blogMode = new(models.Blog)
-	_, blog := blogMode.GetBlogList()
-	this.Data["Lists"] = blog
-	this.TplName = "blog/blog.html"
+func (this *MenuController) Menu() {
+	var menuMode = new(models.Menu)
+	_, menu := menuMode.GetMenuList()
+	this.Data["Lists"] = menu
+	this.TplName = "menu/menu.html"
 	return
 }
 
 //
 //添加功能
 //
-func (this *BlogController) AddBlog() {
-	this.TplName = "blog/addblog.html"
+func (this *MenuController) AddMenu() {
+	this.TplName = "menu/addmenu.html"
 	return
 }
 
 //
 //添加功能
 //
-func (this *BlogController) AddBlogDo() {
+func (this *MenuController) AddMenuDo() {
 	title := this.Input().Get("title")
+	link := this.Input().Get("link")
 	sort := this.Input().Get("sort")
-	content := this.Input().Get("content")
-	description := this.Input().Get("description")
 	state := this.Input().Get("state")
 
 	valid := validation.Validation{}
 	valid.Required(title, "title").Message("请输入标题")
-	valid.Required(content, "content").Message("请输入博文")
+	valid.Required(link, "link").Message("请输入访问地址")
 	valid.Required(state, "state").Message("请选择状态")
 	if valid.HasErrors() {
 		// 打印错误信息
@@ -54,8 +53,8 @@ func (this *BlogController) AddBlogDo() {
 
 	sortid, _ := strconv.Atoi(sort)
 	stateid, _ := strconv.Atoi(state)
-	blogMode := &models.Blog{Title: title, Sort: sortid, Description: description, Content: content, State: uint(stateid), CreateTime: this.Time}
-	err, _ := blogMode.AddBlog()
+	menuMode := &models.Menu{Title: title, Link: link, Sort: sortid, State: uint(stateid), CreateTime: this.Time}
+	err, _ := menuMode.AddMenu()
 	if err == nil {
 		this.AjaxReturn("1", "添加成功", nil)
 		return
@@ -68,35 +67,34 @@ func (this *BlogController) AddBlogDo() {
 //
 //修改功能
 //
-func (this *BlogController) EditBlog() {
+func (this *MenuController) EditMenu() {
 	id := this.Input().Get("id")
 	idint, _ := strconv.Atoi(id)
-	var blogmodel = new(models.Blog)
-	err, result := blogmodel.GetBlogInfo(idint)
+	var menumodel = new(models.Menu)
+	err, result := menumodel.GetMenuInfo(idint)
 	if err != nil {
 		this.Redirect(this.URLFor("AdminController.Main"), 302)
 		return
 	}
 	this.Data["Val"] = result
-	this.TplName = "blog/editblog.html"
+	this.TplName = "menu/editmenu.html"
 	return
 }
 
 //
 //修改功能
 //
-func (this *BlogController) EditBlogDo() {
+func (this *MenuController) EditMenuDo() {
 	title := this.Input().Get("title")
+	link := this.Input().Get("link")
 	sort := this.Input().Get("sort")
-	content := this.Input().Get("content")
-	description := this.Input().Get("description")
 	state := this.Input().Get("state")
 	id := this.Input().Get("id")
 
 	valid := validation.Validation{}
 	valid.Required(id, "id").Message("非法操作")
 	valid.Required(title, "title").Message("请输入标题")
-	valid.Required(content, "content").Message("请输入博文")
+	valid.Required(link, "link").Message("请输入访问地址")
 	valid.Required(state, "state").Message("请选择状态")
 
 	if valid.HasErrors() {
@@ -110,8 +108,8 @@ func (this *BlogController) EditBlogDo() {
 	sortid, _ := strconv.Atoi(sort)
 	autoid, _ := strconv.Atoi(id)
 	stateid, _ := strconv.Atoi(state)
-	blogMode := &models.Blog{Title: title, Sort: sortid, Description: description, Content: content, State: uint(stateid), UpdateTime: this.Time}
-	err, _ := blogMode.UpdateBlog(autoid)
+	menuMode := &models.Menu{Title: title, Sort: sortid, Link: link, State: uint(stateid), UpdateTime: this.Time}
+	err, _ := menuMode.UpdateMenu(autoid)
 	if err == nil {
 		this.AjaxReturn("1", "修改成功", nil)
 		return
@@ -124,7 +122,7 @@ func (this *BlogController) EditBlogDo() {
 //
 //删除功能
 //
-func (this *BlogController) DelBlog() {
+func (this *MenuController) DelMenu() {
 	id := this.Input().Get("id")
 	valid := validation.Validation{}
 	valid.Required(id, "id").Message("非法操作")
@@ -136,8 +134,8 @@ func (this *BlogController) DelBlog() {
 		}
 	}
 	autoid, _ := strconv.Atoi(id)
-	var blogmodel = new(models.Blog)
-	err, _ := blogmodel.DelBlog(autoid)
+	var menumodel = new(models.Menu)
+	err, _ := menumodel.DelMenu(autoid)
 	if err == nil {
 		this.AjaxReturn("1", "删除成功", nil)
 		return
@@ -148,26 +146,9 @@ func (this *BlogController) DelBlog() {
 }
 
 //
-// 查看详情
-//
-func (this *BlogController) DetailBlog() {
-	id := this.Input().Get("id")
-	idint, _ := strconv.Atoi(id)
-	var blogmodel = new(models.Blog)
-	err, result := blogmodel.GetBlogInfo(idint)
-	if err != nil {
-		this.Redirect(this.URLFor("AdminController.Main"), 302)
-		return
-	}
-	this.Data["Val"] = result
-	this.TplName = "blog/detailblog.html"
-	return
-}
-
-//
 //更新排序
 //
-func (this *BlogController) SortBlog() {
+func (this *MenuController) SortMenu() {
 	ids := make([]string, 0)
 	sorts := make([]string, 0)
 	this.Ctx.Input.Bind(&ids, "id")
@@ -176,12 +157,12 @@ func (this *BlogController) SortBlog() {
 		this.AjaxReturn("0", "更新失败", nil)
 		return
 	}
-	var blogmodel = new(models.Blog)
+	var menumodel = new(models.Menu)
 	for k, v := range ids {
 		sortid, _ := strconv.Atoi(sorts[k])
 		id, _ := strconv.Atoi(v)
-		blogmodel.Sort = sortid
-		err, _ := blogmodel.SortBlog(id)
+		menumodel.Sort = sortid
+		err, _ := menumodel.SortMenu(id)
 		if err != nil {
 			this.AjaxReturn("0", "更新失败", nil)
 			return

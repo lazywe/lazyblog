@@ -1,0 +1,21 @@
+<!--{template "../global/header.html" .}-->
+<link rel="stylesheet" href="<!--{config "String" "home.skin" ""}-->/css/markdown.css"/>
+<!--banner-->
+<div class="banner">
+    <div class="winwin container">
+        <h3><!--{.val.Title}--></h3>
+        <p class="other">发表于 <!--{time_format .val.CreateTime "Y-m-d H:i"}--></p>
+    </div>
+</div>
+<!--详情-->
+<div class="home-panal winwin">
+    <div class="left article markdown-body" id="article"><!--{.val.Content}--></div>
+    <!--{template "../global/right.html" .}-->
+    <div class="cl"></div>
+</div>
+<!--{template "../global/footer.html" .}-->
+<script src="<!--{config "String" "admin.skin" ""}-->/js/component/markdown.js"></script>
+<script>
+    var article = document.getElementById('article') 
+    article.innerHTML = marked(article.innerHTML);
+  </script>

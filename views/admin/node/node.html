@@ -33,7 +33,7 @@
 										<td id="{$v.id}"><span j="name" class="doubleclick"><!--{.Url}--></span></td>
 										<td>{$v.position|positionval}</td>
 										<td>
-											<!--{if .Status}-->
+											<!--{if .State}-->
 												<font color="green">启动</font>
 											<!--{else}-->
 												<font color="red">关闭</font>
@@ -42,13 +42,19 @@
 										<td><i class="<!--{.Ico}--> fa"></i></td>
 										<td>{$v.hint|hint}</td>
 										<td>
-											<include file="Global:right_btn"/>
+											<a title="修改" onclick="$.window('修改','<!--{urlfor "NodeController.EditNode" "id" .Id}-->')">
+												<i class="fa fa-lg  text-navy fa-edit"></i>
+											</a>&nbsp;&nbsp;
+											<a title="删除" onclick="$.c('确认删除吗？','<!--{urlfor "NodeController.DelNode" "id" .Id}-->')">
+												<i class="fa fa-lg  text-navy fa-trash"></i>
+											</a>
 										</td>
 									</tr>
 								<!--{end}-->
 							</tbody>
 						</table>
-						<include file="Global:bottom_btn"/>
+						<a class="btn btn-primary btn-sm" onclick="$.window('添加','<!--{urlfor "NodeController.AddNode"}-->')" title="{$bottomval.title}"><i class="fa fa-add"></i> 添加</a>&nbsp;
+						<a class="btn btn-primary btn-sm" onclick="$.updatesort('<!--{urlfor "NodeController.SortNode"}-->')" title="{$bottomval.title}"><i class="fa fa-add"></i> 更新排序</a>&nbsp;
 					</div>
 				</div>
 				</form>

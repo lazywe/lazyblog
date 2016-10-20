@@ -2,23 +2,22 @@ package models
 
 import "github.com/astaxie/beego/orm"
 
-type Blog struct {
-	Id          int    `orm:"pk;auto"`
-	Title       string `orm:"default(0);size(32)"`
-	Content     string `orm:"type(text)"`
-	Sort        int    `orm:"default(0);`
-	CreateTime  uint   `orm:"default(0);size(10)"`
-	Description string `orm:"default(0);size(255)"`
-	State       uint   `orm:"default(0);size(1)"`
-	UpdateTime  uint   `orm:"default(0);size(10)"`
+type Menu struct {
+	Id         int    `orm:"pk;auto;"`
+	Title      string `orm:"default(0);size(32);"`
+	Link       string `orm:"default(0);size(128);"`
+	Sort       int    `orm:"default(0);`
+	CreateTime uint   `orm:size(10)`
+	State      uint   `orm:"default(0);size(1)"`
+	UpdateTime uint   `orm:"default(0);size(10)"`
 }
 
 //
 // 查询功能列表
 //
-func (this *Blog) GetBlogList() (error, []Blog) {
+func (this *Menu) GetMenuList() (error, []Menu) {
 	o := orm.NewOrm()
-	var blog []Blog
+	var blog []Menu
 	result := o.QueryTable(this)
 	result = result.OrderBy("-Sort")
 	_, err := result.All(&blog)
@@ -31,7 +30,7 @@ func (this *Blog) GetBlogList() (error, []Blog) {
 //
 // 添加功能
 //
-func (this *Blog) AddBlog() (error, int) {
+func (this *Menu) AddMenu() (error, int) {
 	o := orm.NewOrm()
 	id, err := o.Insert(this)
 	if err != nil {
@@ -43,10 +42,10 @@ func (this *Blog) AddBlog() (error, int) {
 //
 // 修改功能
 //
-func (this *Blog) UpdateBlog(id int) (error, int) {
+func (this *Menu) UpdateMenu(id int) (error, int) {
 	o := orm.NewOrm()
 	this.Id = id
-	num, err := o.Update(this, "Title", "Sort", "Description", "Content", "State", "UpdateTime")
+	num, err := o.Update(this, "Title", "Sort", "State", "Link", "UpdateTime")
 	if err != nil {
 		return orm.ErrNoRows, 0
 	}
@@ -56,7 +55,7 @@ func (this *Blog) UpdateBlog(id int) (error, int) {
 //
 // 读取功能
 //
-func (this *Blog) GetBlogInfo(id int) (error, *Blog) {
+func (this *Menu) GetMenuInfo(id int) (error, *Menu) {
 	o := orm.NewOrm()
 	this.Id = id
 	err := o.Read(this)
@@ -69,7 +68,7 @@ func (this *Blog) GetBlogInfo(id int) (error, *Blog) {
 //
 // 删除
 //
-func (this *Blog) DelBlog(id int) (error, int) {
+func (this *Menu) DelMenu(id int) (error, int) {
 	o := orm.NewOrm()
 	this.Id = id
 	num, err := o.Delete(this)
@@ -82,7 +81,7 @@ func (this *Blog) DelBlog(id int) (error, int) {
 //
 // 排序
 //
-func (this *Blog) SortBlog(id int) (error, int) {
+func (this *Menu) SortMenu(id int) (error, int) {
 	o := orm.NewOrm()
 	this.Id = id
 	num, err := o.Update(this, "Sort")
@@ -97,13 +96,15 @@ func (this *Blog) SortBlog(id int) (error, int) {
 /***************************************** 前台查询 *********************************************/
 /***************************************** 前台查询 *********************************************/
 
-func (this *Blog) GetHomeBlogList() (error, []Blog) {
-
+//
+// 查询功能列表
+//
+func (this *Menu) GetHomeMenuList() (error, []Menu) {
 	o := orm.NewOrm()
-	var blog []Blog
+	var blog []Menu
 	result := o.QueryTable(this)
 	result = result.OrderBy("-Sort").Filter("State", 1)
-	_, err := result.All(&blog)
+	_, err := result.All(&blog, "Title", "Link")
 	if err != nil {
 		return err, nil
 	}
