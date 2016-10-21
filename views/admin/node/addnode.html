@@ -20,10 +20,10 @@
 							<label class="col-sm-1 control-label"><span class="red">＊</span>上级</label>
 							<div class="col-sm-4">
 								<select class="select form-control m-b" name="pid">
-									<option value="0">根菜单</option>
+									<option value="0">--根菜单--</option>
 									<!--{range .Nodes}-->
 										<option value="<!--{.Id}-->">
-											<!--{(str_replace .Level "&nbsp;") | str2html}--><!--{.Title}-->
+											<!--{(str_replace .Level "|－") | str2html}--><!--{.Title}-->
 										</option>
 									<!--{end}-->
 								</select>
@@ -41,7 +41,7 @@
 						<div class="hr-line-dashed"></div>
 
 						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>位置
+							<label class="col-sm-1 control-label"><span class="red">＊</span>功能类型
 							</label>
 
 							<div class="col-sm-5">
@@ -56,6 +56,10 @@
 								<label class="checkbox-inline">
 									<input type="radio" name="position" id="optionsRadios3" value="3"> 全局按钮
 								</label>
+
+								<label class="checkbox-inline">
+									<input type="radio" name="position" id="optionsRadios3" value="4" > 无
+								</label>
 							</div>
 							<span class="help-block m-b-none"></span>
 						</div>
@@ -63,7 +67,7 @@
 				
 						
 						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>提示
+							<label class="col-sm-1 control-label"><span class="red">＊</span>操作类型
 							</label>
 							<div class="col-sm-5">
 								<label class="checkbox-inline">

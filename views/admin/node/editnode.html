@@ -20,11 +20,13 @@
 							<label class="col-sm-1 control-label"><span class="red">＊</span>上级<!--{.Val.Pid}--></label>
 							<div class="col-sm-4">
 								<select class="select form-control m-b" name="pid">
-									<option value="0">根菜单</option>
+									<option value="0">--根菜单--</option>
 									<!--{range .Nodes}-->
-										<option value="<!--{.Id}-->" <!--{if eq .Id $.Val.Pid}-->selected="selected"<!--{end}-->>
-											<!--{(str_replace .Level "&nbsp;") | str2html}--><!--{.Title}-->
-										</option>
+										<!--{if ne $.Val.Id .Pid}-->
+											<option value="<!--{.Id}-->" <!--{if eq .Id $.Val.Pid}-->selected="selected"<!--{end}-->>
+												<!--{(str_replace .Level "|－") | str2html}--><!--{.Title}-->
+											</option>
+										<!--{end}-->
 									<!--{end}-->
 								</select>
 							</div>
@@ -41,20 +43,24 @@
 						<div class="hr-line-dashed"></div>
 
 						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>位置
+							<label class="col-sm-1 control-label"><span class="red">＊</span>功能类型
 							</label>
 
 							<div class="col-sm-5">
 								<label class="checkbox-inline">
-									<input type="radio" name="position" id="optionsRadios3" <!--{if checked .Val.Position 1}-->checked="checked"<!--{end}--> > 数据查询
+									<input type="radio" name="position" value="1" <!--{if checked .Val.Position 1}-->checked="checked"<!--{end}--> > 数据查询
 								</label>
 
 								<label class="checkbox-inline">
-									<input type="radio" name="position" id="optionsRadios3" <!--{if checked .Val.Position 2}-->checked="checked"<!--{end}-->> 单条操作
+									<input type="radio" name="position" value="2" <!--{if checked .Val.Position 2}-->checked="checked"<!--{end}-->> 单条操作
 								</label>
 
 								<label class="checkbox-inline">
-									<input type="radio" name="position" id="optionsRadios3" <!--{if checked .Val.Position 3}-->checked="checked"<!--{end}-->> 全局按钮
+									<input type="radio" name="position" value="3"  <!--{if checked .Val.Position 3}-->checked="checked"<!--{end}-->> 全局按钮
+								</label>
+
+								<label class="checkbox-inline">
+									<input type="radio" name="position" value="4" <!--{if checked .Val.Position 4}-->checked="checked"<!--{end}-->> 无
 								</label>
 							</div>
 							<span class="help-block m-b-none"></span>
@@ -63,7 +69,7 @@
 				
 						
 						<div class="form-group">
-							<label class="col-sm-1 control-label"><span class="red">＊</span>提示
+							<label class="col-sm-1 control-label"><span class="red">＊</span>操作类型
 							</label>
 							<div class="col-sm-5">
 								<label class="checkbox-inline">

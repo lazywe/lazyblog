@@ -20,7 +20,8 @@ type Node struct {
 func (this *Node) GetNodeList() (bool, []Node) {
 	o := orm.NewOrm()
 	var nodes []Node
-	_, err := o.QueryTable(this).All(&nodes)
+	result := o.QueryTable(this).OrderBy("-Sort")
+	_, err := result.All(&nodes)
 	return err != orm.ErrNoRows, nodes
 }
 
@@ -42,7 +43,7 @@ func (this *Node) AddNode() (error, int) {
 func (this *Node) UpdateNode(id int) (error, int) {
 	o := orm.NewOrm()
 	this.Id = id
-	num, err := o.Update(this, "Title", "Sort", "Description", "Content", "State", "UpdateTime")
+	num, err := o.Update(this, "Pid", "Sort", "Url", "Title", "State", "Position", "Ico", "Hint")
 	if err != nil {
 		return orm.ErrNoRows, 0
 	}

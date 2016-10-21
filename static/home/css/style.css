@@ -43,13 +43,14 @@
 
 .banner{
      width:100%;
-     height:150px;
-     background:
-     #4183c4;
+     min-height:110px;
+     padding: 20px 0;
+     background:#4183c4;
 }
+
 .banner .container{
     margin: 0 auto;
-    padding-top:2%; 
+    padding-top:1%; 
 }
 .banner .container h3{
     font-size: 28px;
@@ -59,6 +60,7 @@
     margin-top: 10px;
     font-size: 14px;
     color: #fff;
+    padding-bottom: 20px;
 }
 /*首页详情*/
 .home-panal{
@@ -72,6 +74,7 @@
     width:65%;
     padding:20px 0;
 }
+
 .home-panal .left ul.home-ul{
     margin-bottom:10px;
 }
@@ -115,6 +118,7 @@
     width:35%;
     padding-top: 20px;
 }
+
 .home-panal .right .boxed{
     width: 80%;
     margin: 0 auto;
@@ -122,6 +126,7 @@
     border:1px solid #ddd;
     border-radius: 3px;
 }
+
 .home-panal .right .boxed h3{
    background: #f5f5f5;
    font-size: 14px;
@@ -235,6 +240,31 @@
     color: #fff;
 }
 
+
+/*********************************   media   ******************************/
+/*********************************   media   ******************************/
+/*********************************   media   ******************************/
+/*********************************   media   ******************************/
+@media screen and (max-width: 1000px) {
+     .home-panal .right, .home-panal .left {
+        float: inherit;
+        width:100%;
+        margin:  0 auto;
+    }
+    .home-panal .left ul.home-ul li .description{
+        width:100%;
+    }
+    .home-panal .right .boxed{
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 30px;
+        border:1px solid #ddd;
+        border-radius: 3px;
+    }
+   .footer .totop{
+       right: 10%;
+   }
+}
 
 
 
