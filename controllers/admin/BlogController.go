@@ -2,6 +2,7 @@ package admin
 
 import (
 	"lazyblog/models"
+	"log"
 	"strconv"
 
 	"github.com/astaxie/beego/validation"
@@ -26,6 +27,12 @@ func (this *BlogController) Blog() {
 //添加功能
 //
 func (this *BlogController) AddBlog() {
+
+	//博客分类
+	var categoryMode = new(models.Category)
+	_, category := categoryMode.GetCategoryList()
+	this.Data["Category"] = category
+
 	this.TplName = "blog/addblog.html"
 	return
 }
@@ -35,6 +42,7 @@ func (this *BlogController) AddBlog() {
 //
 func (this *BlogController) AddBlogDo() {
 	title := this.Input().Get("title")
+	category_id := this.Input().Get("category_id")
 	sort := this.Input().Get("sort")
 	content := this.Input().Get("content")
 	description := this.Input().Get("description")
@@ -42,6 +50,7 @@ func (this *BlogController) AddBlogDo() {
 
 	valid := validation.Validation{}
 	valid.Required(title, "title").Message("请输入标题")
+	valid.Required(category_id, "category_id").Message("请选择分类")
 	valid.Required(content, "content").Message("请输入博文")
 	valid.Required(state, "state").Message("请选择状态")
 	if valid.HasErrors() {
@@ -54,7 +63,10 @@ func (this *BlogController) AddBlogDo() {
 
 	sortid, _ := strconv.Atoi(sort)
 	stateid, _ := strconv.Atoi(state)
-	blogMode := &models.Blog{Title: title, Sort: sortid, Description: description, Content: content, State: uint(stateid), CreateTime: this.Time}
+	Category := new(models.Category)
+	intcategory_id, _ := strconv.Atoi(category_id)
+	Category.Id = intcategory_id
+	blogMode := &models.Blog{Title: title, Sort: sortid, Description: description, Content: content, Category: Category, State: uint(stateid), CreateTime: this.Time}
 	err, _ := blogMode.AddBlog()
 	if err == nil {
 		this.AjaxReturn("1", "添加成功", nil)
@@ -77,6 +89,12 @@ func (this *BlogController) EditBlog() {
 		this.Redirect(this.URLFor("AdminController.Main"), 302)
 		return
 	}
+
+	//博客分类
+	var categoryMode = new(models.Category)
+	_, category := categoryMode.GetCategoryList()
+	this.Data["Category"] = category
+	log.Println(result)
 	this.Data["Val"] = result
 	this.TplName = "blog/editblog.html"
 	return
@@ -87,6 +105,7 @@ func (this *BlogController) EditBlog() {
 //
 func (this *BlogController) EditBlogDo() {
 	title := this.Input().Get("title")
+	category_id := this.Input().Get("category_id")
 	sort := this.Input().Get("sort")
 	content := this.Input().Get("content")
 	description := this.Input().Get("description")
@@ -96,6 +115,7 @@ func (this *BlogController) EditBlogDo() {
 	valid := validation.Validation{}
 	valid.Required(id, "id").Message("非法操作")
 	valid.Required(title, "title").Message("请输入标题")
+	valid.Required(category_id, "category_id").Message("请选择分类")
 	valid.Required(content, "content").Message("请输入博文")
 	valid.Required(state, "state").Message("请选择状态")
 
@@ -110,7 +130,10 @@ func (this *BlogController) EditBlogDo() {
 	sortid, _ := strconv.Atoi(sort)
 	autoid, _ := strconv.Atoi(id)
 	stateid, _ := strconv.Atoi(state)
-	blogMode := &models.Blog{Title: title, Sort: sortid, Description: description, Content: content, State: uint(stateid), UpdateTime: this.Time}
+	Category := new(models.Category)
+	intcategory_id, _ := strconv.Atoi(category_id)
+	Category.Id = intcategory_id
+	blogMode := &models.Blog{Title: title, Sort: sortid, Description: description, Content: content, Category: Category, State: uint(stateid), UpdateTime: this.Time}
 	err, _ := blogMode.UpdateBlog(autoid)
 	if err == nil {
 		this.AjaxReturn("1", "修改成功", nil)

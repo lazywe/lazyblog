@@ -3,14 +3,15 @@ package models
 import "github.com/astaxie/beego/orm"
 
 type Blog struct {
-	Id          int    `orm:"pk;auto"`
-	Title       string `orm:"default(0);size(32)"`
-	Content     string `orm:"type(text)"`
-	Sort        int    `orm:"default(0);`
-	CreateTime  uint   `orm:"default(0);size(10)"`
-	Description string `orm:"default(0);size(255)"`
-	State       uint   `orm:"default(0);size(1)"`
-	UpdateTime  uint   `orm:"default(0);size(10)"`
+	Id          int       `orm:"pk;auto"`
+	Title       string    `orm:"default(0);size(32)"`
+	Content     string    `orm:"type(text)"`
+	Sort        int       `orm:"default(0);`
+	CreateTime  uint      `orm:"default(0);size(10)"`
+	Description string    `orm:"default(0);size(255)"`
+	State       uint      `orm:"default(0);size(1)"`
+	UpdateTime  uint      `orm:"default(0);size(10)"`
+	Category    *Category `orm:"rel(one)"`
 }
 
 //
@@ -19,7 +20,9 @@ type Blog struct {
 func (this *Blog) GetBlogList() (error, []Blog) {
 	o := orm.NewOrm()
 	var blog []Blog
-	result := o.QueryTable(this)
+	// var category Category
+	result := o.QueryTable(this).RelatedSel()
+
 	result = result.OrderBy("-Sort")
 	_, err := result.All(&blog)
 	if err != nil {
