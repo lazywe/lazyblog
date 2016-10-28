@@ -20,9 +20,9 @@ func Init() {
 //
 // 字符串替换函数，根据数量替换
 //
-// @param in uint     需要替换的数量
-// @param str string  需要替换的字符串
-// @return out string 替换后的结果
+// @param  uint    in   需要替换的数量
+// @param  string  str  需要替换的字符串
+// @return string  out  替换后的结果
 func str_replace(in uint, str string) (out string) {
 	return strings.Repeat(str, int(in))
 }
@@ -30,6 +30,8 @@ func str_replace(in uint, str string) (out string) {
 //
 // 时间格式化
 //
+// @param uint   in     需要替换的事件戳
+// @param string format 替换的格式  Y-m-d H:i:s
 func time_format(in uint, format string) (out string) {
 	if in == 0 {
 		return "null"

@@ -17,8 +17,8 @@ func main() {
 }
 
 func init() {
-
-	orm.Debug = true
+	debug, _ := beego.AppConfig.Bool("db.debug")
+	orm.Debug = debug
 	dbuser := beego.AppConfig.String("db.user")
 	dbpass := beego.AppConfig.String("db.pass")
 	dbprefix := beego.AppConfig.String("db.prefix")
