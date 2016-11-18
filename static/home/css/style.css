@@ -276,4 +276,5 @@
 /*************************  article  *************************/
 .article{
     padding-top:50px !important;
+    min-height: 600px;
 }
