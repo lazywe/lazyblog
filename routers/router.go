@@ -33,16 +33,6 @@ func init() {
 	beego.Router("/main/blog/sortblog.html", &admin.BlogController{}, "post:SortBlog")
 	beego.Router("/main/blog/detailblog.html", &admin.BlogController{}, "get:DetailBlog")
 
-	//推荐位管理
-	// beego.Router("/main/recommend/recommend.html", &admin.RecommendController{}, "get:Recommend")
-	// beego.Router("/main/recommend/addrecommend.html", &admin.RecommendController{}, "get:AddRecommend")
-	// beego.Router("/main/recommend/addrecommend.html", &admin.RecommendController{}, "post:AddRecommendDo")
-	// beego.Router("/main/recommend/editrecommend.html", &admin.RecommendController{}, "get:EditRecommend")
-	// beego.Router("/main/recommend/editrecommend.html", &admin.RecommendController{}, "post:EditRecommendDo")
-	// beego.Router("/main/recommend/delrecommend.html", &admin.RecommendController{}, "post:DelRecommend")
-	// beego.Router("/main/recommend/sortrecommend.html", &admin.RecommendController{}, "post:SortRecommend")
-	// beego.Router("/main/recommend/detailrecommend.html", &admin.RecommendController{}, "get:DetailRecommend")
-
 	//分类管理
 	beego.Router("/main/category/category.html", &admin.CategoryController{}, "get:Category")
 	beego.Router("/main/category/addcategory.html", &admin.CategoryController{}, "get:AddCategory")

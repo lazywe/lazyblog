@@ -217,32 +217,12 @@
 			</div>
 		</div>
 	</div>
-	<script src="<!--{config "String" "admin.skin" ""}-->/js/socket.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-			$("#fixednavbar").click(function(){if($("#fixednavbar").is(":checked"))(".navbar-static-top").removeClass("navbar-static-top").addClass("navbar-fixed-top");$("body").removeClass("boxed-layout");$("body").addClass("fixed-nav");$("#boxedlayout").prop("checked",false);if(localStorageSupport){localStorage.setItem("boxedlayout","off")}if(localStorageSupport){localStorage.setItem("fixednavbar","on")}}else(".navbar-fixed-top").removeClass("navbar-fixed-top").addClass("navbar-static-top");$("body").removeClass("fixed-nav");if(localStorageSupport){localStorage.setItem("fixednavbar","off")}}});$("#wavstatus").click(function(){if($("#wavstatus").is(":checked")){if(localStorageSupport){localStorage.setItem("wavstatus","on")}}else{if(localStorageSupport){localStorage.setItem("wavstatus","off")}}});$("#collapsemenu").click(function(){if($("#collapsemenu").is(":checked"))("body").addClass("mini-navbar");SmoothlyMenu();if(localStorageSupport){localStorage.setItem("collapse_menu","on")}}else("body").removeClass("mini-navbar");SmoothlyMenu();if(localStorageSupport){localStorage.setItem("collapse_menu","off")}}});$("#boxedlayout").click(function(){if($("#boxedlayout").is(":checked"))("body").addClass("boxed-layout");$("#fixednavbar").prop("checked",false);$(".navbar-fixed-top").removeClass("navbar-fixed-top").addClass("navbar-static-top");$("body").removeClass("fixed-nav");if(localStorageSupport){localStorage.setItem("fixednavbar","off")}if(localStorageSupport){localStorage.setItem("boxedlayout","on")}}else("body").removeClass("boxed-layout");if(localStorageSupport){localStorage.setItem("boxedlayout","off")}}});$(".spin-icon").click(function()(".theme-config-box").toggleClass("show")});$(".s-skin-0").click(function()("body").removeClass("skin-1");$("body").removeClass("skin-2");$("body").removeClass("skin-3")});$(".s-skin-1").click(function()("body").removeClass("skin-2");$("body").removeClass("skin-3");$("body").addClass("skin-1")});$(".s-skin-3").click(function()("body").removeClass("skin-1");$("body").removeClass("skin-2");$("body").addClass("skin-3")});if(localStorageSupport){var collapse=localStorage.getItem("collapse_menu");var fixednavbar=localStorage.getItem("fixednavbar");var boxedlayout=localStorage.getItem("boxedlayout");var wavstatus=localStorage.getItem("wavstatus");if(collapse=="on")("#collapsemenu").prop("checked","checked")}if(fixednavbar=="on")("#fixednavbar").prop("checked","checked")}if(boxedlayout=="on")("#boxedlayout").prop("checked","checked")}if(wavstatus=="on")("#wavstatus").prop("checked","checked")}};
+		$("#fixednavbar").click(function(){if($("#fixednavbar").is(":checked")){$(".navbar-static-top").removeClass("navbar-static-top").addClass("navbar-fixed-top");$("body").removeClass("boxed-layout");$("body").addClass("fixed-nav");$("#boxedlayout").prop("checked",false);if(localStorageSupport){localStorage.setItem("boxedlayout","off")}if(localStorageSupport){localStorage.setItem("fixednavbar","on")}}else{$(".navbar-fixed-top").removeClass("navbar-fixed-top").addClass("navbar-static-top");$("body").removeClass("fixed-nav");if(localStorageSupport){localStorage.setItem("fixednavbar","off")}}});$("#wavstatus").click(function(){if($("#wavstatus").is(":checked")){if(localStorageSupport){localStorage.setItem("wavstatus","on")}}else{if(localStorageSupport){localStorage.setItem("wavstatus","off")}}});$("#collapsemenu").click(function(){if($("#collapsemenu").is(":checked")){$("body").addClass("mini-navbar");SmoothlyMenu();if(localStorageSupport){localStorage.setItem("collapse_menu","on")}}else{$("body").removeClass("mini-navbar");SmoothlyMenu();if(localStorageSupport){localStorage.setItem("collapse_menu","off")}}});$("#boxedlayout").click(function(){if($("#boxedlayout").is(":checked")){$("body").addClass("boxed-layout");$("#fixednavbar").prop("checked",false);$(".navbar-fixed-top").removeClass("navbar-fixed-top").addClass("navbar-static-top");$("body").removeClass("fixed-nav");if(localStorageSupport){localStorage.setItem("fixednavbar","off")}if(localStorageSupport){localStorage.setItem("boxedlayout","on")}}else{$("body").removeClass("boxed-layout");if(localStorageSupport){localStorage.setItem("boxedlayout","off")}}});$(".spin-icon").click(function(){$(".theme-config-box").toggleClass("show")});$(".s-skin-0").click(function(){$("body").removeClass("skin-1");$("body").removeClass("skin-2");$("body").removeClass("skin-3")});$(".s-skin-1").click(function(){$("body").removeClass("skin-2");$("body").removeClass("skin-3");$("body").addClass("skin-1")});$(".s-skin-3").click(function(){$("body").removeClass("skin-1");$("body").removeClass("skin-2");$("body").addClass("skin-3")});if(localStorageSupport){var collapse=localStorage.getItem("collapse_menu");var fixednavbar=localStorage.getItem("fixednavbar");var boxedlayout=localStorage.getItem("boxedlayout");var wavstatus=localStorage.getItem("wavstatus");if(collapse=="on"){$("#collapsemenu").prop("checked","checked")}if(fixednavbar=="on"){$("#fixednavbar").prop("checked","checked")}if(boxedlayout=="on"){$("#boxedlayout").prop("checked","checked")}if(wavstatus=="on"){$("#wavstatus").prop("checked","checked")}};
 			/*刷新*/
 			$('#J_refresh').bind('click', function() {
 				$('#content-main iframe:visible')[0].contentWindow.location.reload();
 			});
-			ioc = io.connect('101.200.139.139:9001');
-			ioc.on('new_order', function(msg) {
-				$('.order-msg').show()
-				var wavstatus = localStorage.getItem("wavstatus");
-				if(wavstatus == 'on'){
-					$.playSound();
-				}
-			})
-			$(function() {
-				$('.order-msg').click(function() {
-					$(this).hide()
-				})
-				var au = document.createElement("audio");
-				au.preload = "auto";
-				au.src = "<!--{config "String" "admin.skin" ""}-->/wav/6138.wav";
-				$.playSound = function() {
-					au.play();
-				}
-			})
 		</script>
 	<style>
 		.fixed-nav .slimScrollDiv #side-menu {

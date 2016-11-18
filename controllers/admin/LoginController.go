@@ -51,10 +51,10 @@ func (this *LoginController) LoginDo() {
 	auth := map[string]interface{}{"user": result.User}
 	this.SetAuth(auth)
 	//返回登录状态
-	// data := map[string]interface{}{"url": this.URLFor("AdminController.Main")}
+	data := map[string]interface{}{"url": this.URLFor("AdminController.Main")}
 
 	// data := map[string]interface{}{"url": this.URLFor("BlogController.Blog")}
-	data := map[string]interface{}{"url": this.URLFor("NodeController.Node")}
+	// data := map[string]interface{}{"url": this.URLFor("NodeController.Node")}
 	this.AjaxReturn("1", "登录成功", data)
 	return
 }

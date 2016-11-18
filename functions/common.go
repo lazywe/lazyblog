@@ -1,6 +1,7 @@
 package functions
 
 import (
+	"strconv"
 	"strings"
 	"time"
 
@@ -15,6 +16,7 @@ func Init() {
 	beego.AddFuncMap("time_format", time_format)
 	beego.AddFuncMap("checked", checked)
 	beego.AddFuncMap("selected", checked)
+	beego.AddFuncMap("recommendCheck", recommendCheck)
 }
 
 //
@@ -70,4 +72,19 @@ func checked(arg1 interface{}, arg2 interface{}) bool {
 		}
 	}
 	return true
+}
+
+//
+// 推荐判断
+//
+func recommendCheck(id int, recs string) string {
+	tempArr := strings.Split(recs, ",")
+	for _, v := range tempArr {
+		intV, _ := strconv.Atoi(v)
+		if id == intV {
+			return "checked"
+			break
+		}
+	}
+	return ""
 }

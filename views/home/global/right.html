@@ -1,46 +1,17 @@
 <div class="right">
 
-	<!--精品-->
+	<!--{range .RecommendsDatas}-->
 	<div class="boxed">
-		<h3>［推荐］一个nb的标题一个nb的标</h3>
+		<h3><!--{.Title}--></h3>
 		<ul>
+			<!--{range .Blog}-->
 			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;ja</a>
+				<a href="<!--{urlfor "ArticleController.Article" "id" .Id}-->" target="_blank"><i class="fa fa-wpforms"></i>&nbsp;
+				<!--{.Title}-->
+				</a>
 			</li>
-			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;不错哦不错哦不错哦不错哦不错哦不错哦不错哦不错哦</a>
-			</li>
-			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;不错哦不错哦不错哦不错哦不错哦不错哦不错哦不错哦</a>
-			</li>
-			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;不错哦不错哦不错哦不错哦不错哦不错哦不错哦不错哦</a>
-			</li>
-			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;不错哦不错哦不错哦不错</a>
-			</li>
+			<!--{end}-->
 		</ul>
 	</div>
-
-	<!--精品-->
-	<div class="boxed">
-		<h3>[推荐]一个nb的标题一个nb的标</h3>
-		<ul>
-			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;ja</a>
-			</li>
-			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;不错哦不错哦不错哦不错哦不错哦不错哦不错哦不错哦</a>
-			</li>
-			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;不错哦不错哦不错哦不错哦不错哦不错哦不错哦不错哦</a>
-			</li>
-			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;不错哦不错哦不错哦不错哦不错哦不错哦不错哦不错哦</a>
-			</li>
-			<li>
-				<a href=""><i class="fa fa-wpforms"></i>&nbsp;不错哦不错哦不错哦不错</a>
-			</li>
-		</ul>
-	</div>
+	<!--{end}-->
 </div>

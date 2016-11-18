@@ -26,8 +26,8 @@ func init() {
 	dbhost := beego.AppConfig.String("db.host")
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", dbuser+":"+dbpass+"@tcp("+dbhost+")/"+dbdatabase+"?charset=utf8")
-	orm.RegisterModelWithPrefix(dbprefix, new(models.Admin), new(models.Node), new(models.Blog), new(models.Category), new(models.Option), new(models.Menu))
-	err := orm.RunSyncdb("default", false, true)
+	orm.RegisterModelWithPrefix(dbprefix, new(models.Admin), new(models.Node), new(models.Blog), new(models.Category), new(models.Option), new(models.Recommend), new(models.Menu))
+	err := orm.RunSyncdb("default", false, false)
 	if err != nil {
 		fmt.Println(err)
 	}
