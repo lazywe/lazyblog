@@ -16,9 +16,16 @@ func (this *ArticleController) Article() {
 		this.Redirect("/", 302)
 	}
 
-	modleblog := new(models.Blog)
-	err, result := modleblog.GetBlogInfo(intid)
+	//查出单条博文
+	modelblog := new(models.Blog)
+	err, result := modelblog.GetBlogInfo(intid)
 	if err != nil {
+		this.Redirect("/", 302)
+	}
+
+	//新增点击数量
+	err2, _ := modelblog.UpdateHitsBlog(intid)
+	if err2 != nil {
 		this.Redirect("/", 302)
 	}
 	this.Data["val"] = result

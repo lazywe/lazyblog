@@ -174,3 +174,18 @@ func (this *Blog) GetRmBlogList() (error, []Blog) {
 	}
 	return nil, blog
 }
+
+//
+// 增加点击量，每次访问加1
+//
+func (this *Blog) UpdateHitsBlog(id int) (error, int) {
+	o := orm.NewOrm()
+	result := o.QueryTable(this).Filter("Id", id)
+	num, err := result.Update(orm.Params{
+		"Hits": orm.ColValue(orm.ColAdd, 1),
+	})
+	if err != nil {
+		return orm.ErrNoRows, 0
+	}
+	return nil, int(num)
+}
