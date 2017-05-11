@@ -170,6 +170,8 @@
     line-height: 30px;
     text-align: center;
     height:30px;
+    text-decoration: none;
+    color: #666;
 }
 .page a.pager{
     padding: 0 8px;
@@ -177,10 +179,10 @@
 .page a.num{
     width:30px;
 }
-.page a.pager:hover,.page a.num:hover{
-    border-color: #418fff;
-    background: #418fff;
-    color: #fff
+.page a.pager:hover,.page a.num:hover,.page a.active{
+    border-color: #418fff !important;
+    background: #418fff !important;
+    color: #fff !important;
 }
 
 /*底部*/

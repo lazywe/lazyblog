@@ -1,0 +1,16 @@
+
+<div class="page">
+    <!--{if .Page.UpPageUrl}-->
+           <a class="pager" href="<!--{.Page.DownPageUrl}-->">上一页</a>
+    <!--{end}-->
+    <!--{range .Page.NumPage}-->
+        <!--{if .isCurrentPage}-->
+            <a class="num active"><!--{.currentpage}--></a>
+         <!--{else}-->
+            <a class="num" href="<!--{.url}-->"><!--{.currentpage}--></a>
+        <!--{end}-->
+    <!--{end}-->
+    <!--{if .Page.DownPageUrl}-->
+           <a class="pager" href="<!--{.Page.DownPageUrl}-->">下一页</a>
+    <!--{end}-->
+</div>

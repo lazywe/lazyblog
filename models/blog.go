@@ -129,17 +129,32 @@ func (this *Blog) SortBlog(id int) (error, int) {
 //
 // 列表
 //
-func (this *Blog) GetHomeBlogList() (error, []Blog) {
-
+func (this *Blog) GetHomeBlogList(Offset int, pagesize int) (error, []Blog) {
 	o := orm.NewOrm()
 	var blog []Blog
 	result := o.QueryTable(this)
 	result = result.OrderBy("-Sort", "-Id").Filter("State", 1)
+	result = result.Limit(pagesize, Offset)
 	_, err := result.All(&blog)
 	if err != nil {
 		return err, nil
 	}
 	return nil, blog
+}
+
+//
+// 总数
+//
+func (this *Blog) GetHomeBlogCount() (error, int64) {
+
+	o := orm.NewOrm()
+	result := o.QueryTable(this)
+	result = result.Filter("State", 1)
+	count, err := result.Count()
+	if err != nil {
+		return err, count
+	}
+	return err, count
 }
 
 //

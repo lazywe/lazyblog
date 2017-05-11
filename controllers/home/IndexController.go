@@ -6,10 +6,12 @@ type IndexController struct {
 	BaseController
 }
 
-func (this *IndexController) Get() {
-
+func (i *IndexController) Get() {
 	var articlemodel = new(models.Blog)
-	_, list := articlemodel.GetHomeBlogList()
-	this.Data["Blogs"] = list
-	this.TplName = "index/index.html"
+	// 获取总数量
+	_, count := articlemodel.GetHomeBlogCount()
+	page := i.PageUtil(count, i.PageSize)
+	_, list := articlemodel.GetHomeBlogList(page.Offset, i.PageSize)
+	i.Data["Blogs"] = list
+	i.TplName = "home/index/index.html"
 }
