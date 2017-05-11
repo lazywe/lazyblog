@@ -14,7 +14,7 @@ type LoginController struct {
 // 登录
 //
 func (this *LoginController) Login() {
-	this.TplName = "admin/login.html"
+	this.setTplName("admin/login")
 }
 
 //

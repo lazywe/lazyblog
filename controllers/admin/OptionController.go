@@ -18,7 +18,7 @@ func (this *OptionController) Option() {
 	var optionMode = new(models.Option)
 	_, option := optionMode.GetOptionList()
 	this.Data["Lists"] = option
-	this.TplName = "option/option.html"
+	this.setTplName("option/option")
 	return
 }
 
@@ -26,7 +26,7 @@ func (this *OptionController) Option() {
 //添加功能
 //
 func (this *OptionController) AddOption() {
-	this.TplName = "option/addoption.html"
+	this.setTplName("option/addoption")
 	return
 }
 
@@ -69,7 +69,7 @@ func (this *OptionController) EditOption() {
 		this.Redirect("/", 1)
 	}
 	this.Data["Val"] = result
-	this.TplName = "option/editoption.html"
+	this.setTplName("option/editoption")
 }
 
 //

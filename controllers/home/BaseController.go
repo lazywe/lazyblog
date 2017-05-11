@@ -17,15 +17,6 @@ type BaseController struct {
 	Time     uint
 }
 
-var Menus []models.Menu
-
-func (b *BaseController) Prepare() {
-	b.Time = uint(time.Now().Unix())
-	b.PageSize = 10
-	b.getMenu()
-	b.getRecommend()
-}
-
 /// 分页
 type Page struct {
 	Offset     int
@@ -37,6 +28,20 @@ type Page struct {
 type RecommendsData struct {
 	Title string
 	Blog  []models.Blog
+}
+
+var Menus []models.Menu
+
+func (b *BaseController) Prepare() {
+	b.Time = uint(time.Now().Unix())
+	b.PageSize = 10
+	b.getMenu()
+	b.getRecommend()
+}
+
+// 设置后台模版路径，与模版主题
+func (this *BaseController) setTplName(file string) {
+	this.TplName = beego.AppConfig.String("home.tpl") + file + beego.AppConfig.String("tpl.ext")
 }
 
 //

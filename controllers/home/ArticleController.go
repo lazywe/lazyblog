@@ -29,5 +29,5 @@ func (this *ArticleController) Article() {
 		this.Redirect("/", 302)
 	}
 	this.Data["val"] = result
-	this.TplName = "home/article/article.html"
+	this.setTplName("article/article")
 }

@@ -21,7 +21,7 @@ type BaseController struct {
 // 初始化函数
 //
 func (this *BaseController) Prepare() {
-	beego.SetViewsPath(beego.AppConfig.String("admin.tpl"))
+	// beego.SetViewsPath(beego.AppConfig.String("admin.tpl"))
 	this.Time = uint(time.Now().Unix())
 	this.SessionKey = "Admin"
 	c, _ := this.GetControllerAndAction()
@@ -37,6 +37,11 @@ func (this *BaseController) Prepare() {
 		log.Println(this.Auth["user"])
 		log.Println(auth)
 	}
+}
+
+// 设置后台模版路径，与模版主题
+func (this *BaseController) setTplName(file string) {
+	this.TplName = beego.AppConfig.String("admin.tpl") + file + beego.AppConfig.String("tpl.ext")
 }
 
 //

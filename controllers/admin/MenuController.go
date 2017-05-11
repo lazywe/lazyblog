@@ -18,7 +18,7 @@ func (this *MenuController) Menu() {
 	var menuMode = new(models.Menu)
 	_, menu := menuMode.GetMenuList()
 	this.Data["Lists"] = menu
-	this.TplName = "menu/menu.html"
+	this.setTplName("menu/menu")
 	return
 }
 
@@ -26,7 +26,7 @@ func (this *MenuController) Menu() {
 //添加功能
 //
 func (this *MenuController) AddMenu() {
-	this.TplName = "menu/addmenu.html"
+	this.setTplName("menu/addmenu")
 	return
 }
 
@@ -77,7 +77,7 @@ func (this *MenuController) EditMenu() {
 		return
 	}
 	this.Data["Val"] = result
-	this.TplName = "menu/editmenu.html"
+	this.setTplName("menu/editmenu")
 	return
 }
 

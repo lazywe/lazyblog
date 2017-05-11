@@ -29,7 +29,7 @@ func (this *AdminController) Main() {
 		Menus = this.MenuList(nodelist, 0)
 	}
 	this.Data["Menus"] = Menus
-	this.TplName = "index/index.html"
+	this.setTplName("index/index")
 }
 
 //递归节点
@@ -50,5 +50,5 @@ func (this *AdminController) MenuList(node []models.Node, pid int) []*Menu {
 }
 
 func (this *AdminController) Panal() {
-	this.TplName = "index/panal.html"
+	this.setTplName("index/panal")
 }

@@ -19,7 +19,7 @@ func (this *BlogController) Blog() {
 	var blogMode = new(models.Blog)
 	_, blog := blogMode.GetBlogList(nil)
 	this.Data["Lists"] = blog
-	this.TplName = "blog/blog.html"
+	this.setTplName("blog/blog")
 	return
 }
 
@@ -38,7 +38,7 @@ func (this *BlogController) AddBlog() {
 	_, recommend := recommendMode.GetAdminRecommendList()
 	this.Data["Recommend"] = recommend
 
-	this.TplName = "blog/addblog.html"
+	this.setTplName("blog/addblog")
 	return
 }
 
@@ -109,7 +109,7 @@ func (this *BlogController) EditBlog() {
 	_, category := categoryMode.GetCategoryList()
 	this.Data["Category"] = category
 	this.Data["Val"] = result
-	this.TplName = "blog/editblog.html"
+	this.setTplName("blog/editblog")
 	return
 }
 
@@ -199,7 +199,7 @@ func (this *BlogController) DetailBlog() {
 		return
 	}
 	this.Data["Val"] = result
-	this.TplName = "blog/detailblog.html"
+	this.setTplName("blog/detailblog")
 	return
 }
 

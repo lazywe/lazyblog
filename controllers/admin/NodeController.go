@@ -36,7 +36,7 @@ func (this *NodeController) Node() {
 		this.Recursive(node, 0, 0, 0)
 	}
 	this.Data["Lists"] = Nodes
-	this.TplName = "node/node.html"
+	this.setTplName("node/node")
 }
 
 //
@@ -65,7 +65,7 @@ func (this *NodeController) AddNode() {
 		this.Recursive(node, 0, 1, 0)
 	}
 	this.Data["Nodes"] = Nodes
-	this.TplName = "node/addnode.html"
+	this.setTplName("node/addnode")
 	return
 }
 
@@ -134,7 +134,7 @@ func (this *NodeController) EditNode() {
 	this.Data["Nodes"] = Nodes
 	this.Data["Val"] = result
 	this.Data["Hint"] = "1"
-	this.TplName = "node/editnode.html"
+	this.setTplName("node/editnode")
 	return
 }
 

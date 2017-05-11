@@ -18,7 +18,7 @@ func (this *CategoryController) Category() {
 	var categoryMode = new(models.Category)
 	_, category := categoryMode.GetCategoryList()
 	this.Data["Lists"] = category
-	this.TplName = "category/category.html"
+	this.setTplName("category/category")
 	return
 }
 
@@ -26,7 +26,7 @@ func (this *CategoryController) Category() {
 //添加功能
 //
 func (this *CategoryController) AddCategory() {
-	this.TplName = "category/addcategory.html"
+	this.setTplName("category/addcategory")
 	return
 }
 
@@ -75,7 +75,7 @@ func (this *CategoryController) EditCategory() {
 		return
 	}
 	this.Data["Val"] = result
-	this.TplName = "category/editcategory.html"
+	this.setTplName("category/editcategory")
 	return
 }
 

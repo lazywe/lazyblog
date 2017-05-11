@@ -13,5 +13,5 @@ func (i *IndexController) Get() {
 	page := i.PageUtil(count, i.PageSize)
 	_, list := articlemodel.GetHomeBlogList(page.Offset, i.PageSize)
 	i.Data["Blogs"] = list
-	i.TplName = "home/index/index.html"
+	i.setTplName("index/index")
 }
